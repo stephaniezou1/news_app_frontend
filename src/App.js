@@ -6,7 +6,7 @@ import SearchArticles from './SearchArticles.jsx'
 function App() {
   return (
     <div className="App">
-      <h1>News For You</h1>
+      <h1>News For You 📖</h1>
       <SearchArticles />
       <ArticlesContainer />
     </div>

@@ -23,9 +23,9 @@ class ArticlesContainer extends Component {
     })
 
     return (
-      <> 
+      <div className = "article-list"> 
         { articlesArr }
-      </>
+      </div>
     )
   }
 }
