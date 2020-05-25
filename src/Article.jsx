@@ -10,12 +10,11 @@ export default class Article extends Component {
         <div className = "card-container">
           <h5>{ source_name }</h5>
           <h2>{ title }</h2>
-
           { author === null ? "" : <h3>By { author }</h3>}
-          <hr></hr>
+        </div>
+        <div className="description">
+          <h4>Description</h4>
           <p>{ description }</p>
-
-          
         </div>
       </div>
     )
