@@ -6,11 +6,14 @@ export default class Article extends Component {
 
     return (
       <div className = "article-card">
-        <img src = { url_to_image } />
+        <a href = { url } target="blank">
+          <img src = { url_to_image } />
+        </a>
         <div className = "card-container">
           <h5>{ source_name }</h5>
           <h2>{ title }</h2>
-          { author === null ? "" : <h3>By { author }</h3>}
+          { author === null || "" ? "" : <h3>By { author }</h3>}
+          {/* <h5>{ published_at }</h5> */}
         </div>
         <div className="description">
           <h4>Description</h4>
