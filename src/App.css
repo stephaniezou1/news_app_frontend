@@ -16,7 +16,7 @@ input {
 }
 
 .article-list {
-  /* column-count: 2; */
+  column-count: 2;
   padding: 20px
 }
 
