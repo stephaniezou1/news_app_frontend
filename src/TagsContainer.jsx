@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Tag from './Tag.jsx'
 
 class TagsContainer extends Component {
   state = {
@@ -19,9 +20,11 @@ class TagsContainer extends Component {
     console.log(this.state.tags)
 
     return (
-      <div>
-        <p>Tags!</p>
-      </div>
+      <>
+        { this.state.tags.map((tag) => {
+          return <Tag key={tag.id} tag={tag} />
+        }) }
+      </>
     )
   }
 }
