@@ -1,38 +1,61 @@
 .App {
-  text-align: center;
+  margin: 100px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  font-family: 'Karla', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.article-list {
+  column-count: 2;
+  padding: 20px
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.article-card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 5px;
+  margin: 60px;
+  width: 500px
 }
 
-.App-link {
-  color: #61dafb;
+.card-container {
+  padding: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.description {
+  background-color: rgb(245, 245, 245);
+  padding: 20px;
+  border-radius: 0px 0px 5px 5px;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 24px
+}
+
+h3 {
+  font-weight: 400;
+}
+
+h5 {
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: "Montserrat", sans-serif;
+    margin: 0px
+}
+
+h2, h3, h4, p {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+img {
+  width: 500px;
+  object-fit: cover;
+  border-radius: 6px 6px 0px 0px;
 }
