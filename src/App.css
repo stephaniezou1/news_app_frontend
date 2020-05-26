@@ -6,14 +6,16 @@ body {
   font-family: 'Karla', sans-serif;
 }
 
-.search-bar {
-  height: 20px;
-  width: 50px;
-  text-align: right;
+input {
+  height: 28px;
+  width: 100%;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 14px;
 }
 
 .article-list {
-  column-count: 2;
+  /* column-count: 2; */
   padding: 20px
 }
 
