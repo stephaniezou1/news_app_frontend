@@ -6,6 +6,12 @@ body {
   font-family: 'Karla', sans-serif;
 }
 
+.search-bar {
+  height: 20px;
+  width: 50px;
+  text-align: right;
+}
+
 .article-list {
   column-count: 2;
   padding: 20px
