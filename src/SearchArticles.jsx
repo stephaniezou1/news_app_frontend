@@ -8,7 +8,7 @@ const SearchArticles = (props) => {
   
 return (
     <div className="search-bar">
-      <label><h3>Search for an article</h3></label>
+      <label><h2>Search for an article</h2></label>
       <input
         type="text"
         name="searchTerm"

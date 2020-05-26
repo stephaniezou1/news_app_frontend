@@ -37,6 +37,25 @@ input {
   border-radius: 0px 0px 5px 5px;
 }
 
+.tag {
+  font-size: 16px;
+  border-radius: 6px;
+  padding: 8px 14px;
+  margin: 6px;
+  background-color: rgb(116, 52, 17);
+  color: white;
+  font-weight: 700;
+  border: none;
+}
+
+.search-bar {
+  margin: 40px 0px;
+}
+
+.tag-list {
+  display: block;
+}
+
 h1 {
   font-size: 48px;
 }

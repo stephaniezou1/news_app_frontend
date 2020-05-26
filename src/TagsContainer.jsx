@@ -20,11 +20,12 @@ class TagsContainer extends Component {
     console.log(this.state.tags)
 
     return (
-      <>
+      <div className="tag-list">
+        <h2>Article Tags</h2>
         { this.state.tags.map((tag) => {
           return <Tag key={tag.id} tag={tag} />
         }) }
-      </>
+      </div>
     )
   }
 }

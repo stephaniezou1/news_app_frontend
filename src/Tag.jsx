@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 
 class Tag extends Component {
   render() {
-    let { content } = this.props.tag 
+    let { content } = this.props.tag
+    let randomColor = require('randomcolor')
+    let color = randomColor()
 
     return (
-      <div className="tag-list">
-        <button className="tag">{content}</button>
-      </div>
+      <>
+        <button className="tag">#{content}</button>
+      </>
     )
   }
 }
