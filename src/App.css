@@ -15,6 +15,26 @@ input {
   border: 1px solid #ccc;
 }
 
+input.new-tag {
+  width: 50%;
+  margin: 10px 0px;
+  height: 32px
+}
+
+input.new-tag-submit {
+  width: 30%;
+  cursor: pointer;
+  background-color: rgb(45, 45, 45);
+  color: white;
+  border: none;
+  font-weight: 700;
+}
+
+form.new-tag {
+  padding: 20px;
+  display: grid;
+}
+
 .article-list {
   column-count: 2;
   padding: 20px

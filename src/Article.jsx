@@ -47,17 +47,18 @@ export default class Article extends Component {
         <div className="article-tag">
 
         </div>
-        <form onSubmit={this.handleSubmit}>
+        <form className="new-tag" onSubmit={this.handleSubmit}>
           <label>
-            New #tag:
-            <input 
-              type="text" 
-              name="newTag"
-              value={this.state.newTag} 
-              onChange={this.handleChange}
-            />
+            Add a #tag
           </label>
-          <input type="submit" value="Submit" />
+          <input
+            className="new-tag" 
+            type="text" 
+            name="newTag"
+            value={this.state.newTag} 
+            onChange={this.handleChange}
+          />
+          <input className="new-tag-submit" type="submit" value="Create tag" />
       </form>
       </div>
     )
