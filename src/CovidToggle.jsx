@@ -16,7 +16,6 @@ class CovidToggle extends Component {
     this.props.handleCovidCheck(this.state.covidcheck)
   }
 
-
   render() {
     return (
       <>

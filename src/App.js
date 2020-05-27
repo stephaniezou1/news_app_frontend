@@ -44,8 +44,9 @@ class App extends React.Component {
 
   handleCovidCheck = (inputFromChild) => {
     this.setState({
-      covidCheck: inputFromChild
+      covidCheck: !inputFromChild
     })
+    console.log(this.state.covidCheck)
   }
 
   handleSearchTerm = (inputFromChild) => {
@@ -57,8 +58,17 @@ class App extends React.Component {
   decideWhichArrayToRender = () => {
     console.log("STATE LOG", this.state)
     let anArray = [...this.state.articles]
-    if (this.state.covidcheck === "true") {
-      anArray = this.state.articles.filter(article => article.content !== "covid-19" || article.content !== "coronavirus")
+    let coronaKeywords = ["coronavirus", "covid-19", "virus"]
+
+    if (this.state.covidCheck === "true") {
+      anArray = this.state.articles.filter(article =>
+        article.title.toLowerCase().includes(coronaKeywords)  
+      )
+      // anArray = this.state.articles.filter(article =>
+      //   article.content !== "covid-19" ||
+      //   article.content !== "coronavirus" ||
+      //   article.title !== "coronavirus"
+      // )
     } else {
       anArray = this.state.articles.filter((article) => {
         return article.description === null
