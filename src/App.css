@@ -30,6 +30,11 @@ input.new-tag-submit {
   font-weight: 700;
 }
 
+input#toggle {
+  height: 25px;
+  width: 25px;
+}
+
 form.new-tag {
   padding: 20px;
   display: grid;
@@ -37,14 +42,16 @@ form.new-tag {
 
 .article-list {
   column-count: 2;
-  padding: 20px
+  padding: 20px;
 }
 
 .article-card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   border-radius: 5px;
-  margin: 60px;
-  width: 500px
+  margin-bottom: 80px;
+  width: 500px;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid
 }
 
 .card-container {
