@@ -2,6 +2,8 @@ import React from 'react'
 import './App.css'
 import ArticlesContainer from './ArticlesContainer.jsx'
 import SearchArticles from './SearchArticles.jsx'
+import TagsContainer from './TagsContainer.jsx'
+import CoronaToggle from './CoronaToggle.jsx'
 
 class App extends React.Component {
 
@@ -18,9 +20,12 @@ class App extends React.Component {
 
   decideWhichArrayToRender = () => {
     let anArray = this.state.articles.filter((article) => {
-      return article.description.toLowerCase().includes(this.state.searchTerm.toLowerCase())
-        ||
-      article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+      return article.description === null
+        ?
+        null
+        :
+        article.description.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+        || article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase())
     })
     return anArray
   }
@@ -42,6 +47,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>News For You 📖</h1>
+        <TagsContainer />
+        <CoronaToggle />
         <SearchArticles 
           searchTerm={this.state.searchTerm}
           handleSearchTerm={this.handleSearchTerm}
