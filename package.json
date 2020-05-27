@@ -10,6 +10,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
+    "react-toggle-component": "^3.0.8",
     "semantic-ui-css": "^2.4.1"
   },
   "scripts": {

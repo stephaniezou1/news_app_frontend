@@ -3,6 +3,7 @@ import './App.css'
 import ArticlesContainer from './ArticlesContainer.jsx'
 import SearchArticles from './SearchArticles.jsx'
 import TagsContainer from './TagsContainer.jsx'
+import CoronaToggle from './CoronaToggle.jsx'
 
 class App extends React.Component {
 
@@ -47,6 +48,7 @@ class App extends React.Component {
       <div className="App">
         <h1>News For You 📖</h1>
         <TagsContainer />
+        <CoronaToggle />
         <SearchArticles 
           searchTerm={this.state.searchTerm}
           handleSearchTerm={this.handleSearchTerm}
