@@ -8,7 +8,7 @@ body {
 
 input {
   height: 40px;
-  width: 100%;
+  width: 80%;
   border-radius: 4px;
   padding: 4px 14px;
   font-size: 14px;
@@ -69,11 +69,25 @@ form.new-tag {
 }
 
 .search-bar {
-  margin: 40px 0px;
+  margin: 20px 0px;
+  background-color: rgb(244, 240, 236);
+  padding: 20px;
+  border-radius: 6px;
 }
 
 .tag-list {
   display: block;
+  margin: 30px 0px;
+  background-color: rgb(244, 240, 236);
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.toggle {
+  margin: 20px 0px;
+  background-color: rgb(244, 240, 236);
+  padding: 20px;
+  border-radius: 6px;
 }
 
 h1 {

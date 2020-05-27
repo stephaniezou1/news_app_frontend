@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import {Toggle} from "react-toggle-component"
 
 class CovidToggle extends Component {
   
@@ -20,19 +19,19 @@ class CovidToggle extends Component {
 
   render() {
     return (
-      <div className="toggle">
-        <form onChange={this.handleToggle}>
-          <label><h2>Show Coronavirus news? (check to hide)</h2></label>
+      <>
+        <form className="toggle" onChange={this.handleToggle}>
+          <label><h2>Show Coronavirus news?</h2><p>Check to hide.</p></label>
           <label> 
             <input 
               type="checkbox" 
               name="name" 
-              id="id" 
+              id="toggle" 
               checked={this.state.covidcheck}
               onChange={this.handleCheck}/>
           </label>
         </form>
-      </div>
+      </>
     )
   }
 }
