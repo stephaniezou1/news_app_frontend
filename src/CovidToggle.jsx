@@ -1,33 +1,23 @@
 import React, { Component } from 'react'
 
 class CovidToggle extends Component {
-  
-  state = {
-    covidCheck: false
-  }
 
-  handleCheck = () => {
-    this.setState((currentState) => ({
-      covidCheck: !currentState.covidCheck
-    }))
-  }
-
-  handleToggle = () => {
-    this.props.handleCovidCheck(this.state.covidCheck)
+  handleToggle = (evt) => {
+    this.props.handleCovidCheck(evt.target.checked)
   }
 
   render() {
     return (
       <>
-        <form className="toggle" onChange={this.handleToggle}>
+        <form className="toggle">
           <label><h2>Show Coronavirus news?</h2><p>Check to hide.</p></label>
           <label> 
             <input 
               type="checkbox" 
               name="name" 
               id="toggle" 
-              checked={this.state.covidCheck}
-              onChange={this.handleCheck}/>
+              checked={this.props.covidCheck}
+              onChange={this.handleToggle}/>
           </label>
         </form>
       </>

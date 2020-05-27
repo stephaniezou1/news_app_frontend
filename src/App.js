@@ -11,8 +11,11 @@ class App extends React.Component {
     articles: [],
     searchTerm: "",
     covidCheck: false,
-    allTags: []
+    allTags: [],
+    arrayOfThingsToCheckFor: []
   }
+
+  ///if the array is empty, show all the articles, if the array is populated, render conditionally
 
 // method 1: create the tag first, and then create a joiner with that tag ID
 // create a pure tag without any article associations
@@ -31,20 +34,27 @@ class App extends React.Component {
       })
     })
       .then(response => response.json())
-      .then((newArticle) => {
-        console.log(newArticle)
-        // let updatedArticlesList = [...this.state.articles, newArticle]
+      .then((responseObject) => {
+        console.log(responseObject)
+        // let updatedArticlesList = [...this.state.articles, responseObject]
         let copyOfArticles = this.state.articles.map((article) => {
           if (article.id === articleId) {
-            return newArticle
+            return responseObject.article
           } else {
             return article
           }
         })
-      this.setState({
-        articles: copyOfArticles,
-        allTags: [...this.state.tags]
-      })
+        
+        if (this.state.allTags.some((tag) => tag.id === responseObject.tag.id)) {
+            this.setState({
+              articles: copyOfArticles
+          })
+        } else {
+          this.setState({
+            articles: copyOfArticles, 
+            allTags: [...this.state.allTags, responseObject.tag]
+          })
+        }
     })
   }
 
@@ -52,7 +62,6 @@ class App extends React.Component {
     this.setState({
       covidCheck: inputFromChild
     })
-    console.log(this.state.covidCheck)
   }
 
   handleSearchTerm = (inputFromChild) => {
@@ -66,16 +75,12 @@ class App extends React.Component {
     let anArray = [...this.state.articles]
     let coronaKeywords = ["coronavirus", "covid-19", "virus"]
 
-    if (this.state.covidCheck === "true") {
+    if (this.state.covidCheck) {
       anArray = this.state.articles.filter((article) => {
-        return !article.title.toLowerCase().includes(coronaKeywords)  
+        return !article.title.toLowerCase().includes("coronavirus")
+          &&
+        !article.content.toLowerCase().includes("coronavirus")
       })
-
-      // anArray = this.state.articles.filter(article =>
-      //   article.content !== "covid-19" ||
-      //   article.content !== "coronavirus" ||
-      //   article.title !== "coronavirus"
-      // )
     } else {
       anArray = this.state.articles.filter((article) => {
         return article.description === null
