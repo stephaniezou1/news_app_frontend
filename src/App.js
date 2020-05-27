@@ -10,12 +10,41 @@ class App extends React.Component {
   state = {
     articles: [],
     searchTerm: "",
-    covidcheck: false
+    covidCheck: false,
+    allTags: []
+  }
+
+  addNewTag = (newTag, articleId) => {
+    fetch(`http://localhost:3000/tags`, {
+      method: "POST",
+      headers: {
+        'Content-type': 'Application/json'
+      },
+      body: JSON.stringify(newTag)
+    })
+      .then(response => response.json())
+      .then((newlyAddedTag) => {
+        let updatedTagsList = [...this.state.allTags, newlyAddedTag]
+        let targetArticle = this.state.articles.map((article) => {
+          if (article.id === articleId) {
+            article.tags.push(newTag)
+            return article
+          } else {
+            return article
+          }
+        })
+        console.log("TARGET ARTICLE", targetArticle)
+        let copyOfArticles = [...this.state.articles, targetArticle]
+        this.setState({
+          allTags: updatedTagsList,
+          articles: copyOfArticles
+        })
+      })
   }
 
   handleCovidCheck = (inputFromChild) => {
     this.setState({
-      covidcheck: inputFromChild
+      covidCheck: inputFromChild
     })
   }
 
@@ -26,9 +55,10 @@ class App extends React.Component {
   }
 
   decideWhichArrayToRender = () => {
+    console.log("STATE LOG", this.state)
     let anArray = [...this.state.articles]
     if (this.state.covidcheck === "true") {
-      anArray = this.state.articles.filter(article => article.content !== "covid-19" || "coronavirus")
+      anArray = this.state.articles.filter(article => article.content !== "covid-19" || article.content !== "coronavirus")
     } else {
       anArray = this.state.articles.filter((article) => {
         return article.description === null
@@ -46,20 +76,30 @@ class App extends React.Component {
     fetch("http://localhost:3000/articles")
     .then(r => r.json())
     .then((newArticles) => {
+      console.log("SEE HERE", newArticles)
       this.setState({
         articles: newArticles
+      })
+    })
+    fetch("http://localhost:3000/tags")
+    .then(r => r.json())
+    .then((newTags) => {
+      this.setState({
+        allTags: newTags
       })
     })
   }
 
   render(){
-    console.log("state articles:", this.state.articles)
-    console.log("searchresult:", this.decideWhichArrayToRender())
+    console.log("STATE CONSOLE LOG", this.state)
+    // console.log("searchresult:", this.decideWhichArrayToRender())
 
     return (
       <div className="App">
-        <h1>News For You 📖</h1>
-        <TagsContainer />
+        <h1>The Hegel Bagel 📖</h1>
+        <TagsContainer 
+          tags={this.state.allTags}
+        />
         <CovidToggle 
           handleCovidCheck={this.handleCovidCheck}
         />
@@ -69,6 +109,7 @@ class App extends React.Component {
         />
         <ArticlesContainer 
           articles={this.decideWhichArrayToRender()}
+          addNewTag={this.addNewTag}
         />
       </div>
     );

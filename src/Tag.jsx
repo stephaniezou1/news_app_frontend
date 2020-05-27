@@ -5,6 +5,7 @@ class Tag extends Component {
     let { content } = this.props.tag
     let randomColor = require('randomcolor')
     let color = randomColor()
+    console.log("HERE", this.props.tag)
 
     return (
       <>
