@@ -1,8 +1,11 @@
 import React from 'react'
 
-let Tag = (props) => {
-  // let { content } = props.tag
-  console.log(props.tag)
+class Tag extends Component {
+  render() {
+    let { content } = this.props.tag
+    let randomColor = require('randomcolor')
+    let color = randomColor()
+    console.log("HERE", this.props.tag)
 
   return (
     <>

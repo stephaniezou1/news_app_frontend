@@ -6,7 +6,11 @@ class ArticlesContainer extends Component {
   render() {
     let articlesArr = this.props.articles.map((article) => {
       // console.log(article)
-      return <Article key = {article.id} article = {article} />
+      return <Article 
+        key = {article.id} 
+        article = {article} 
+        addNewTag = {this.props.addNewTag}
+      />
     })
 
     return (
