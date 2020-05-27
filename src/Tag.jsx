@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 class Tag extends Component {
   render() {
@@ -15,6 +15,7 @@ class Tag extends Component {
       </button>
     </>
   )
+  }
 }
 
 export default Tag
