@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Tag from './Tag.jsx'
 
 export default class Article extends Component {
   render() {
@@ -19,6 +20,7 @@ export default class Article extends Component {
           <h4>Description</h4>
           <p>{ description }</p>
         </div>
+        <Tag/>
       </div>
     )
   }
