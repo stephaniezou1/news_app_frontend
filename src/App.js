@@ -53,8 +53,8 @@ class App extends React.Component {
   }
 
   render(){
-    console.log("state articles:", this.state.articles)
-    console.log("searchresult:", this.decideWhichArrayToRender())
+    // console.log("state articles:", this.state.articles)
+    // console.log("searchresult:", this.decideWhichArrayToRender())
 
     return (
       <div className="App">

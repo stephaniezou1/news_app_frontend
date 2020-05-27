@@ -1,17 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Tag extends Component {
-  render() {
-    let { content } = this.props.tag
-    let randomColor = require('randomcolor')
-    let color = randomColor()
+let Tag = (props) => {
+  // let { content } = props.tag
+  console.log(props.tag)
 
-    return (
-      <>
-        <button className="tag">#{content}</button>
-      </>
-    )
-  }
+  return (
+    <>
+      <button className="tag">
+        #
+        {/* { content }  */}
+      </button>
+    </>
+  )
 }
 
 export default Tag

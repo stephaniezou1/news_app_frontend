@@ -17,7 +17,7 @@ class TagsContainer extends Component {
   }
 
   render() {
-    console.log(this.state.tags)
+    // console.log(this.state.tags)
 
     return (
       <div className="tag-list">
