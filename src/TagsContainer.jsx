@@ -11,7 +11,7 @@ class TagsContainer extends Component {
       />
     })
 
-    console.log(this.props.tags)
+    // console.log(this.props.tags)
 
     return (
       <div className="tag-list">

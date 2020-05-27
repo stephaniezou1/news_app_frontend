@@ -3,17 +3,17 @@ import React, { Component } from 'react'
 class CovidToggle extends Component {
   
   state = {
-    covidcheck: false
+    covidCheck: false
   }
 
   handleCheck = () => {
     this.setState((currentState) => ({
-      covidcheck: !currentState.covidcheck
+      covidCheck: !currentState.covidCheck
     }))
   }
 
   handleToggle = () => {
-    this.props.handleCovidCheck(this.state.covidcheck)
+    this.props.handleCovidCheck(this.state.covidCheck)
   }
 
   render() {
@@ -26,7 +26,7 @@ class CovidToggle extends Component {
               type="checkbox" 
               name="name" 
               id="toggle" 
-              checked={this.state.covidcheck}
+              checked={this.state.covidCheck}
               onChange={this.handleCheck}/>
           </label>
         </form>

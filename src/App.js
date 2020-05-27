@@ -14,37 +14,43 @@ class App extends React.Component {
     allTags: []
   }
 
+// method 1: create the tag first, and then create a joiner with that tag ID
+// create a pure tag without any article associations
+// somehow pull in the specific article that we want to create a tag for
+// AND THEN create a joiner instance
+
   addNewTag = (newTag, articleId) => {
     fetch(`http://localhost:3000/tags`, {
       method: "POST",
       headers: {
         'Content-type': 'Application/json'
       },
-      body: JSON.stringify(newTag)
+      body: JSON.stringify({
+        content: newTag,
+        article_id: articleId
+      })
     })
       .then(response => response.json())
-      .then((newlyAddedTag) => {
-        let updatedTagsList = [...this.state.allTags, newlyAddedTag]
-        let targetArticle = this.state.articles.map((article) => {
+      .then((newArticle) => {
+        console.log(newArticle)
+        // let updatedArticlesList = [...this.state.articles, newArticle]
+        let copyOfArticles = this.state.articles.map((article) => {
           if (article.id === articleId) {
-            article.tags.push(newTag)
-            return article
+            return newArticle
           } else {
             return article
           }
         })
-        console.log("TARGET ARTICLE", targetArticle)
-        let copyOfArticles = [...this.state.articles, targetArticle]
-        this.setState({
-          allTags: updatedTagsList,
-          articles: copyOfArticles
-        })
+      this.setState({
+        articles: copyOfArticles,
+        allTags: [...this.state.tags]
       })
+    })
   }
 
   handleCovidCheck = (inputFromChild) => {
     this.setState({
-      covidCheck: !inputFromChild
+      covidCheck: inputFromChild
     })
     console.log(this.state.covidCheck)
   }
@@ -56,14 +62,15 @@ class App extends React.Component {
   }
 
   decideWhichArrayToRender = () => {
-    console.log("STATE LOG", this.state)
+    // console.log("STATE LOG", this.state)
     let anArray = [...this.state.articles]
     let coronaKeywords = ["coronavirus", "covid-19", "virus"]
 
     if (this.state.covidCheck === "true") {
-      anArray = this.state.articles.filter(article =>
-        article.title.toLowerCase().includes(coronaKeywords)  
-      )
+      anArray = this.state.articles.filter((article) => {
+        return !article.title.toLowerCase().includes(coronaKeywords)  
+      })
+
       // anArray = this.state.articles.filter(article =>
       //   article.content !== "covid-19" ||
       //   article.content !== "coronavirus" ||
@@ -86,7 +93,7 @@ class App extends React.Component {
     fetch("http://localhost:3000/articles")
     .then(r => r.json())
     .then((newArticles) => {
-      console.log("SEE HERE", newArticles)
+      // console.log("SEE HERE", newArticles)
       this.setState({
         articles: newArticles
       })
@@ -102,7 +109,7 @@ class App extends React.Component {
 
   render(){
 
-    console.log("STATE CONSOLE LOG", this.state)
+    // console.log("STATE CONSOLE LOG", this.state)
     // console.log("searchresult:", this.decideWhichArrayToRender())
 
     return (
@@ -111,7 +118,8 @@ class App extends React.Component {
         <TagsContainer 
           tags={this.state.allTags}
         />
-        <CovidToggle 
+        <CovidToggle
+          covidCheck = {this.state.covidCheck}
           handleCovidCheck={this.handleCovidCheck}
         />
         <SearchArticles 
