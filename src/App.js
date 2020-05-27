@@ -3,13 +3,20 @@ import './App.css'
 import ArticlesContainer from './ArticlesContainer.jsx'
 import SearchArticles from './SearchArticles.jsx'
 import TagsContainer from './TagsContainer.jsx'
-import CoronaToggle from './CoronaToggle.jsx'
+import CovidToggle from './CovidToggle.jsx'
 
 class App extends React.Component {
 
   state = {
     articles: [],
-    searchTerm: ""
+    searchTerm: "",
+    covidcheck: false
+  }
+
+  handleCovidCheck = (inputFromChild) => {
+    this.setState({
+      covidcheck: inputFromChild
+    })
   }
 
   handleSearchTerm = (inputFromChild) => {
@@ -19,14 +26,19 @@ class App extends React.Component {
   }
 
   decideWhichArrayToRender = () => {
-    let anArray = this.state.articles.filter((article) => {
-      return article.description === null
-        ?
-        null
-        :
-        article.description.toLowerCase().includes(this.state.searchTerm.toLowerCase())
-        || article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase())
-    })
+    let anArray = [...this.state.articles]
+    if (this.state.covidcheck === "true") {
+      anArray = this.state.articles.filter(article => article.content !== "covid-19" || "coronavirus")
+    } else {
+      anArray = this.state.articles.filter((article) => {
+        return article.description === null
+          ?
+          null
+          :
+          article.description.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+          || article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+      })
+    }
     return anArray
   }
 
@@ -48,7 +60,9 @@ class App extends React.Component {
       <div className="App">
         <h1>News For You 📖</h1>
         <TagsContainer />
-        <CoronaToggle />
+        <CovidToggle 
+          handleCovidCheck={this.handleCovidCheck}
+        />
         <SearchArticles 
           searchTerm={this.state.searchTerm}
           handleSearchTerm={this.handleSearchTerm}
