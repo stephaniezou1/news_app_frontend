@@ -91,6 +91,7 @@ class App extends React.Component {
   }
 
   render(){
+
     console.log("STATE CONSOLE LOG", this.state)
     // console.log("searchresult:", this.decideWhichArrayToRender())
 
