@@ -8,9 +8,11 @@ const SearchArticles = (props) => {
   
 return (
     <div className="search-bar">
+      <label><h2>Search for an article</h2></label>
       <input
         type="text"
         name="searchTerm"
+        placeholder="Start typing an article title, author, or tag"
         value={props.searchTerm}
         onChange={handleWhichInfoToPassUp}
       />
