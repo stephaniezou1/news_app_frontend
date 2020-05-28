@@ -5,6 +5,10 @@ const SearchArticles = (props) => {
   const handleWhichInfoToPassUp = (evt) => {
     props.handleSearchTerm(evt.target.value);
   }
+
+  const handleReset = () => {
+    props.handleSearchTerm("")
+  }
   
 return (
     <div className="search-bar">
@@ -17,6 +21,7 @@ return (
         value={props.searchTerm}
         onChange={handleWhichInfoToPassUp}
       />
+      <button onClick={handleReset}>Clear search terms</button>
     </div>
   )
 };

@@ -13,7 +13,6 @@ class App extends React.Component {
     covidCheck: false,
     allTags: [],
     arrayOfThingsToCheckFor: [],
-    selectedTag: ""
   }
 
   addNewTag = (newTag, articleId) => {
@@ -63,15 +62,9 @@ class App extends React.Component {
     })
   }
 
-  handleSelectedTag = (inputFromChild) => {
-    this.setState({
-      selectedTag: inputFromChild
-    })
-  }
-
   decideWhichArrayToRender = () => {
     // console.log("STATE LOG", this.state)
-    let { covidCheck, selectedTag, searchTerm, articles } = this.state
+    let { covidCheck, searchTerm, articles } = this.state
     let anArray = [...articles]
 
     if (covidCheck === true) {
@@ -91,12 +84,10 @@ class App extends React.Component {
           article.description.toLowerCase().includes(searchTerm.toLowerCase())
           || article.title.toLowerCase().includes(searchTerm.toLowerCase())
       })
-    } else if (selectedTag === "") {
-      return anArray
-    } else if (selectedTag !== "") {
+    } else {
       anArray = articles.filter((article) => {
         return article.joiners.map((joiner) =>
-           `#${joiner.tag_name}` === selectedTag
+           `#${joiner.tag_name}` === searchTerm
         )
       })
     }
@@ -131,7 +122,7 @@ class App extends React.Component {
         <h1 className="header">The Hegel Bagel 📖</h1>
         <TagsContainer 
           tags={this.state.allTags}
-          handleSelectedTag={this.handleSelectedTag}
+          handleSearchTerm={this.handleSearchTerm}
         />
         <CovidToggle
           covidCheck = {this.state.covidCheck}
