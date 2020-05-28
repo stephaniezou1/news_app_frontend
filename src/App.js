@@ -4,7 +4,6 @@ import ArticlesContainer from './ArticlesContainer.jsx'
 import SearchArticles from './SearchArticles.jsx'
 import TagsContainer from './TagsContainer.jsx'
 import CovidToggle from './CovidToggle.jsx'
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Article from './Article'
 
 class App extends React.Component {
@@ -18,14 +17,16 @@ class App extends React.Component {
     selectedTag: ""
   }
 
-///if the array is empty, show all the articles, if the array is populated, render conditionally
 
-// method 1: create the tag first, and then create a joiner with that tag ID
-// create a pure tag without any article associations
-// somehow pull in the specific article that we want to create a tag for
-// AND THEN create a joiner instance
-
-  // identify tag_id from the joiner
+  deleteATag = (updatedArticleFromChild, joinerId) => {
+    console.log("UPDATED ARTICLE", updatedArticleFromChild)
+    let copyOfAllArticles = this.state.articles.filter((article) => article.id !== updatedArticleFromChild)
+    // let copyOfAllTags = this.state.allTags.filter((tag) => tag.id !== updatedArticleFromChild.joinerId)
+    this.setState({
+      articles: copyOfAllArticles
+      // allTags: copyOfAllTags
+    })
+  }
 
   addNewTag = (newTag, articleId) => {
     fetch(`http://localhost:3000/tags`, {

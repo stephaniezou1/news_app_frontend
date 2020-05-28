@@ -18,51 +18,41 @@ class Article extends Component {
   handleSubmit = (evt) => {
     evt.preventDefault()
     this.props.addNewTag(this.state.newTag, this.props.article.id)
-    evt.target.reset()
+    this.setState({
+      newTag: ""
+    })
   }
 
-  // handleDelete = (tagToBeDeleted) => {
-  //   let newArticleTags = []
-  //   this.props.article.joiners.map((joiner) => {
-  //     if (joiner.tag_id === tagToBeDeleted.id) {
-  //       newArticleTags = this.props.article.joiners.filter(tag => tag !== tagToBeDeleted)
-  //     }
-  //   })
-  //   return newArticleTags  
-  // }
-
-  // deleteATag = (idOfJoinerFromArticle) => {
-  //   fetch(`http://localhost:3000/joiners/${idOfJoinerFromArticle}`, {
-  //     method: "DELETE"
-  //   })
-  //     .then(resp => resp.json())
-  //     .then((deletedTag) => {
-
-  //       handleDelete(deletedTag)
-  //     })
-  // } 
+  handleDelete = (joinerId) => {
+    fetch(`http://localhost:3000/joiners/${joinerId}`, {
+      method: "DELETE"
+    })
+      .then(resp => resp.json())
+      .then((updatedArticle) => {
+        this.props.deleteATag(updatedArticle, joinerId)
+      })
+  } 
 
   render() {
 
-    console.log("article joiner id", this.props.article.joiners.tag_id)
-    let { title, author, description, source_name, published_at, url, url_to_image } = this.props.article 
+    // console.log("article joiners", this.props.article.joiners)
+    let { title, author, source_name, published_at, url, url_to_image } = this.props.article 
 
     let tagsArray = this.props.article.joiners.map((joiner) => {
       return <div> 
-        <button className="tag" key={joiner.tag_id}>#{ joiner.tag_name }</button>
-        {/* <button onChange={this.deleteATag}>x</button>  */}
+        <button className="tag" key={joiner.id}>#{ joiner.tag_name }</button>
+        <button onClick={(evt) => {
+          this.handleDelete(joiner.id)
+        }}>x</button> 
       </div>
     })
 
-    // console.log("see here", tagsArray)
-    // console.log("ARTICLE CONSOLE LOG", this.props.article)
+    
     return (
         <div className = "card">
 
         <div className="image">
-          {/* <a href = { url } target="blank"> */}
-            <img src = { url_to_image } />
-            {/* </a> */}
+          <a href = { url } target="blank"><img src = { url_to_image } /></a>
         </div>
 
         <div className="meta">
@@ -76,19 +66,6 @@ class Article extends Component {
           { tagsArray }
         </div>
         
-        {/* <div className="extra content">
-          <div className="ui large transparent left icon input">
-            <i className="tags icon"></i>
-            <input 
-              type="text" 
-              placeholder="Add a new tag" 
-              name="newTag"
-              value={this.state.newTag} 
-              onChange={this.handleChange}
-            />
-            <button type="submit" class="ui button">Submit</button>          </div>
-        </div> */}
-
         {/* <h4>Description</h4>
           <p>{ description }</p> */}
         
