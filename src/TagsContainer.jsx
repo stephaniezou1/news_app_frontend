@@ -9,11 +9,11 @@ class TagsContainer extends Component {
       return <Tag 
         key={tag.id}
         tag={tag}
-        handleSearchTerm={this.props.handleSearchTerm}
+        handleSelectedTag={this.props.handleSelectedTag}
       />
     })
 
-    console.log("check this out", this.props.tags)
+    // console.log("check this out", this.props.tags)
 
     return (
       <div className="tag-list">

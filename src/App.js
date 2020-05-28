@@ -63,14 +63,19 @@ class App extends React.Component {
     })
   }
 
+  handleSelectedTag = (inputFromChild) => {
+    this.setState({
+      selectedTag: inputFromChild
+    })
+  }
+
   decideWhichArrayToRender = () => {
     // console.log("STATE LOG", this.state)
-    let anArray = [...this.state.articles]
-    let { covidCheck, selectedTag, searchTerm } = this.state
-    // let coronaKeywords = ["coronavirus", "covid-19", "virus"]
+    let { covidCheck, selectedTag, searchTerm, articles } = this.state
+    let anArray = [...articles]
 
     if (covidCheck === true) {
-      anArray = this.state.articles.filter((article) => {
+      anArray = articles.filter((article) => {
         return article.description === null
         ?
         !article.title.toLowerCase().includes("coronavirus")
@@ -78,7 +83,7 @@ class App extends React.Component {
         !article.title.toLowerCase().includes("coronavirus") && !article.description.toLowerCase().includes("coronavirus")
       })
     } else if (covidCheck === false) {
-      anArray = this.state.articles.filter((article) => {
+      anArray = articles.filter((article) => {
         return article.description === null
           ?
           null
@@ -88,8 +93,13 @@ class App extends React.Component {
       })
     } else if (selectedTag === "") {
       return anArray
+    } else if (selectedTag !== "") {
+      anArray = articles.filter((article) => {
+        return article.joiners.map((joiner) =>
+           `#${joiner.tag_name}` === selectedTag
+        )
+      })
     }
-    // write another else if statement to filter for tag values
     return anArray
   }
 
@@ -113,7 +123,7 @@ class App extends React.Component {
 
   render(){
 
-    console.log("STATE CONSOLE LOG", this.state.articles)
+    // console.log("STATE CONSOLE LOG", this.state.articles)
     // console.log("searchresult:", this.decideWhichArrayToRender())
 
     return (
@@ -121,7 +131,7 @@ class App extends React.Component {
         <h1 className="header">The Hegel Bagel 📖</h1>
         <TagsContainer 
           tags={this.state.allTags}
-          handleSearchTerm={this.handleSearchTerm}
+          handleSelectedTag={this.handleSelectedTag}
         />
         <CovidToggle
           covidCheck = {this.state.covidCheck}
