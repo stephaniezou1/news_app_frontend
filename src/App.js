@@ -73,13 +73,11 @@ class App extends React.Component {
   decideWhichArrayToRender = () => {
     // console.log("STATE LOG", this.state)
     let anArray = [...this.state.articles]
-    let coronaKeywords = ["coronavirus", "covid-19", "virus"]
+    // let coronaKeywords = ["coronavirus", "covid-19", "virus"]
 
     if (this.state.covidCheck) {
       anArray = this.state.articles.filter((article) => {
-        return !article.title.toLowerCase().includes("coronavirus")
-          &&
-        !article.content.toLowerCase().includes("coronavirus")
+        return !article.description.toLowerCase().includes("coronavirus")
       })
     } else {
       anArray = this.state.articles.filter((article) => {
@@ -114,7 +112,7 @@ class App extends React.Component {
 
   render(){
 
-    // console.log("STATE CONSOLE LOG", this.state)
+    console.log("STATE CONSOLE LOG", this.state.articles)
     // console.log("searchresult:", this.decideWhichArrayToRender())
 
     return (

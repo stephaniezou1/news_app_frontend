@@ -17,6 +17,7 @@ export default class Article extends Component {
   handleSubmit = (evt) => {
     evt.preventDefault()
     this.props.addNewTag(this.state.newTag, this.props.article.id)
+    evt.target.reset()
   }
 
   render() {
@@ -26,6 +27,16 @@ export default class Article extends Component {
     // console.log(dateString)
 
     let { title, author, description, source_name, published_at, url, url_to_image } = this.props.article 
+
+    let tagsArray = this.props.article.joiners.map((tag) => {
+      return <Tag 
+        tag={tag.tag_name}
+        key={tag.tag_id}
+      />
+    })
+
+    // console.log("see here", tagsArray)
+
     // console.log("ARTICLE CONSOLE LOG", this.props.article)
     return (
       <div className = "article-card">
@@ -45,7 +56,7 @@ export default class Article extends Component {
           <p>{ description }</p>
         </div>
         <div className="article-tag">
-
+          {tagsArray}
         </div>
         <form className="new-tag" onSubmit={this.handleSubmit}>
           <label>
