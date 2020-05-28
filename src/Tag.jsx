@@ -9,7 +9,6 @@ class Tag extends Component {
 
   render() {
     let { content } = this.props.tag
-
   return (
     <>
       <button className="tag" onClick={this.handleTagFilter}>

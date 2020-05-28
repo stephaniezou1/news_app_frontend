@@ -4,6 +4,7 @@ import ArticlesContainer from './ArticlesContainer.jsx'
 import SearchArticles from './SearchArticles.jsx'
 import TagsContainer from './TagsContainer.jsx'
 import CovidToggle from './CovidToggle.jsx'
+import Article from './Article'
 
 class App extends React.Component {
 
@@ -15,7 +16,17 @@ class App extends React.Component {
     arrayOfThingsToCheckFor: [],
   }
 
-  addNewTag = (newTag, articleId) => {
+deleteATag = (updatedArticleFromChild, joinerId) => {
+    console.log("UPDATED ARTICLE", updatedArticleFromChild)
+    let copyOfAllArticles = this.state.articles.filter((article) => article.id !== updatedArticleFromChild)
+    // let copyOfAllTags = this.state.allTags.filter((tag) => tag.id !== updatedArticleFromChild.joinerId)
+    this.setState({
+      articles: copyOfAllArticles
+      // allTags: copyOfAllTags
+    })
+  }
+
+addNewTag = (newTag, articleId) => {
     fetch(`http://localhost:3000/tags`, {
       method: "POST",
       headers: {
@@ -118,6 +129,7 @@ class App extends React.Component {
     // console.log("searchresult:", this.decideWhichArrayToRender())
 
     return (
+  
       <div className="App">
         <h1 className="header">The Hegel Bagel 📖</h1>
         <TagsContainer 
@@ -135,6 +147,7 @@ class App extends React.Component {
         <ArticlesContainer 
           articles={this.decideWhichArrayToRender()}
           addNewTag={this.addNewTag}
+          deleteATag={this.deleteATag}
         />
       </div>
     );
