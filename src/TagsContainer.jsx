@@ -7,7 +7,8 @@ class TagsContainer extends Component {
    
     let tagArr = this.props.tags.map((tag) => {
       return <Tag 
-        key={tag.id} tag={tag}
+        key={tag.id}
+        tag={tag}
       />
     })
 

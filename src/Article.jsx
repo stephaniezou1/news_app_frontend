@@ -21,18 +21,14 @@ export default class Article extends Component {
   }
 
   render() {
-    // turn the published_at value into a string so that we can format it
-    let object = this.props.article
-    let dateString = JSON.stringify(object.published_at)
-    // console.log(dateString)
-
     let { title, author, description, source_name, published_at, url, url_to_image } = this.props.article 
 
-    let tagsArray = this.props.article.joiners.map((tag) => {
-      return <Tag 
-        tag={tag.tag_name}
-        key={tag.tag_id}
-      />
+    let tagsArray = this.props.article.joiners.map((joiner) => {
+      // return <Tag 
+      //   tag={joiner.tag_name}
+      //   key={joiner.tag_id}
+      // />
+      return <button className="tag" key={joiner.tag_id}>#{ joiner.tag_name }</button>
     })
 
     // console.log("see here", tagsArray)
@@ -52,7 +48,7 @@ export default class Article extends Component {
         <h5 className="header" id="date">{ published_at }</h5>
 
         <div className="article-tag">
-          {tagsArray}
+          { tagsArray }
         </div>
         
         <div className="extra content">
