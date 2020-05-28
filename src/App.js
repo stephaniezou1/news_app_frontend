@@ -16,13 +16,6 @@ class App extends React.Component {
     selectedTag: ""
   }
 
-///if the array is empty, show all the articles, if the array is populated, render conditionally
-
-// method 1: create the tag first, and then create a joiner with that tag ID
-// create a pure tag without any article associations
-// somehow pull in the specific article that we want to create a tag for
-// AND THEN create a joiner instance
-
   addNewTag = (newTag, articleId) => {
     fetch(`http://localhost:3000/tags`, {
       method: "POST",
@@ -37,7 +30,6 @@ class App extends React.Component {
       .then(response => response.json())
       .then((responseObject) => {
         console.log(responseObject)
-        // let updatedArticlesList = [...this.state.articles, responseObject]
         let copyOfArticles = this.state.articles.map((article) => {
           if (article.id === articleId) {
             return responseObject.article

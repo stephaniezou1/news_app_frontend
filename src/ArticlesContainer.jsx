@@ -5,7 +5,6 @@ class ArticlesContainer extends Component {
  
   render() {
     let articlesArr = this.props.articles.map((article) => {
-      // console.log(article)
       return <Article 
         key = {article.id} 
         article = {article} 
@@ -14,9 +13,12 @@ class ArticlesContainer extends Component {
     })
 
     return (
-      <div className = "ui two stackable cards"> 
+      <>
+      <h3>Showing { this.props.articles.length } articles</h3> 
+      <div className = "ui two stackable cards">
         { articlesArr }
       </div>
+      </>
     )
   }
 }
