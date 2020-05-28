@@ -4,6 +4,8 @@ import ArticlesContainer from './ArticlesContainer.jsx'
 import SearchArticles from './SearchArticles.jsx'
 import TagsContainer from './TagsContainer.jsx'
 import CovidToggle from './CovidToggle.jsx'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Article from './Article'
 
 class App extends React.Component {
 
@@ -22,6 +24,8 @@ class App extends React.Component {
 // create a pure tag without any article associations
 // somehow pull in the specific article that we want to create a tag for
 // AND THEN create a joiner instance
+
+  // identify tag_id from the joiner
 
   addNewTag = (newTag, articleId) => {
     fetch(`http://localhost:3000/tags`, {
@@ -125,6 +129,7 @@ class App extends React.Component {
     // console.log("searchresult:", this.decideWhichArrayToRender())
 
     return (
+      
       <div className="App">
         <h1 className="header">The Hegel Bagel 📖</h1>
         <TagsContainer 
@@ -142,6 +147,7 @@ class App extends React.Component {
         <ArticlesContainer 
           articles={this.decideWhichArrayToRender()}
           addNewTag={this.addNewTag}
+          deleteATag={this.deleteATag}
         />
       </div>
     );

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Tag from './Tag.jsx'
+// import { Button, Checkbox, Form } from 'semantic-ui-react'
 
-export default class Article extends Component {
+class Article extends Component {
 
   state = {
     newTag: ""
@@ -20,15 +21,37 @@ export default class Article extends Component {
     evt.target.reset()
   }
 
+  handleDelete = (tagToBeDeleted) => {
+    let newArticleTags = []
+    this.props.article.joiners.map((joiner) => {
+      if (joiner.tag_id === tagToBeDeleted.id) {
+        newArticleTags = this.props.article.joiners.filter(tag => tag !== tagToBeDeleted)
+      }
+    })
+    return newArticleTags  
+  }
+
+  deleteATag = (idOfJoinerFromArticle) => {
+    fetch(`http://localhost:3000/joiners/${idOfJoinerFromArticle}`, {
+      method: "DELETE"
+    })
+      .then(resp => resp.json())
+      .then((deletedTag) => {
+
+        handleDelete(deletedTag)
+      })
+  } 
+
   render() {
+
+    console.log("article joiner id", this.props.article.joiners.tag_id)
     let { title, author, description, source_name, published_at, url, url_to_image } = this.props.article 
 
     let tagsArray = this.props.article.joiners.map((joiner) => {
-      // return <Tag 
-      //   tag={joiner.tag_name}
-      //   key={joiner.tag_id}
-      // />
-      return <button className="tag" key={joiner.tag_id}>#{ joiner.tag_name }</button>
+      return <div> 
+        <button className="tag" key={joiner.tag_id}>#{ joiner.tag_name }</button>
+        <button onChange={this.deleteATag}>x</button> 
+      </div>
     })
 
     // console.log("see here", tagsArray)
@@ -51,31 +74,45 @@ export default class Article extends Component {
           { tagsArray }
         </div>
         
-        <div className="extra content">
+        {/* <div className="extra content">
           <div className="ui large transparent left icon input">
             <i className="tags icon"></i>
-            <input type="text" placeholder="Add a new tag" />
-          </div>
-        </div>
+            <input 
+              type="text" 
+              placeholder="Add a new tag" 
+              name="newTag"
+              value={this.state.newTag} 
+              onChange={this.handleChange}
+            />
+            <button type="submit" class="ui button">Submit</button>          </div>
+        </div> */}
 
         {/* <h4>Description</h4>
           <p>{ description }</p> */}
         
-        {/* <form className="new-tag" onSubmit={this.handleSubmit}>
-          <label>
+        <form className="new-tag" onSubmit={this.handleSubmit}>
+          <h5>
             Add a #tag
-          </label>
+          </h5>
           <input
             className="new-tag" 
             type="text" 
             name="newTag"
             value={this.state.newTag} 
             onChange={this.handleChange}
+            autoComplete="off"
+            placeholder="#"
           />
-          <input className="new-tag-submit" type="submit" value="Create tag" />
-        </form> */}
+          <input 
+            className="new-tag-submit" 
+            type="submit" 
+            value="Create tag" 
+          />
+        </form>
 
       </div>
     )
   }
 }
+
+export default Article;

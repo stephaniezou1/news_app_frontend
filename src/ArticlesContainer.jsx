@@ -10,6 +10,7 @@ class ArticlesContainer extends Component {
         key = {article.id} 
         article = {article} 
         addNewTag = {this.props.addNewTag}
+        deleteATag = {this.props.deleteATag}
       />
     })
 
