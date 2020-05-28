@@ -9,6 +9,7 @@ class TagsContainer extends Component {
       return <Tag 
         key={tag.id}
         tag={tag}
+        handleSearchTerm={this.props.handleSearchTerm}
       />
     })
 
