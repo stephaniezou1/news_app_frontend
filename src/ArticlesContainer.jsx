@@ -2,11 +2,7 @@ import React, { Component } from 'react'
 import Article from "./Article.jsx"
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-
 class ArticlesContainer extends Component {
-
-  
- 
   render() {
     let articlesArr = this.props.articles.map((article) => {
       return ( <Article

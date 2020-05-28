@@ -34,19 +34,20 @@ class Article extends Component {
   } 
 
   render() {
-
-    // console.log("article joiners", this.props.article.joiners)
     let { title, author, source_name, published_at, url, url_to_image } = this.props.article 
 
     let tagsArray = this.props.article.joiners.map((joiner) => {
-      return <div> 
-        <button className="tag" key={joiner.id}>#{ joiner.tag_name }</button>
+      return <div key={joiner.id}> 
+        <button
+          className="tag"
+          key={joiner.id}>
+            #{ joiner.tag_name }
+        </button>
         <button onClick={(evt) => {
           this.handleDelete(joiner.id)
         }}>x</button> 
       </div>
     })
-
     
     return (
         <div className = "card">

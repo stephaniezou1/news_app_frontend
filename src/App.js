@@ -19,9 +19,11 @@ class App extends React.Component {
 deleteATag = (updatedArticleFromChild, joinerId) => {
     console.log("UPDATED ARTICLE", updatedArticleFromChild)
     let copyOfAllArticles = this.state.articles.filter((article) => article.id !== updatedArticleFromChild)
-    // let copyOfAllTags = this.state.allTags.filter((tag) => tag.id !== updatedArticleFromChild.joinerId)
+    // let copyOfAllTags = this.state.allTags.filter((tag) =>
+    //   tag.id !== updatedArticleFromChild.joinerId
+    // )
     this.setState({
-      articles: copyOfAllArticles
+      articles: copyOfAllArticles,
       // allTags: copyOfAllTags
     })
   }
@@ -95,14 +97,28 @@ addNewTag = (newTag, articleId) => {
           article.description.toLowerCase().includes(searchTerm.toLowerCase())
           || article.title.toLowerCase().includes(searchTerm.toLowerCase())
       })
-    } else {
-      anArray = articles.filter((article) => {
-        return article.joiners.map((joiner) =>
-           `#${joiner.tag_name}` === searchTerm
-        )
-      })
     }
     return anArray
+  }
+
+  formatString = (string) => {
+    return string.replace(/[^A-Za-z0-9_]/g,"");
+  }
+
+  pickArticles = () => {
+    let { searchTerm, articles } = this.state
+    let newArray = [...articles]
+
+    if (searchTerm === "") {
+      return newArray
+    } else {
+      newArray = articles.filter((article) => {
+        article.joiners.map((joiner) => {
+          return joiner.tag_name === searchTerm.replace(/[^A-Za-z0-9_]/g,"")
+        })
+      })
+    }
+    return newArray
   }
 
   componentDidMount() {
@@ -127,6 +143,7 @@ addNewTag = (newTag, articleId) => {
 
     // console.log("STATE CONSOLE LOG", this.state.articles)
     // console.log("searchresult:", this.decideWhichArrayToRender())
+    console.log(this.state.searchTerm.replace(/[^A-Za-z0-9_]/g,""))
 
     return (
   
@@ -145,7 +162,8 @@ addNewTag = (newTag, articleId) => {
           handleSearchTerm={this.handleSearchTerm}
         />
         <ArticlesContainer 
-          articles={this.decideWhichArrayToRender()}
+          // articles={this.decideWhichArrayToRender()}
+          articles={this.pickArticles()}
           addNewTag={this.addNewTag}
           deleteATag={this.deleteATag}
         />
