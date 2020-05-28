@@ -15,17 +15,7 @@ class App extends React.Component {
     covidCheck: false,
     allTags: [],
     arrayOfThingsToCheckFor: [],
-    selectedTag: ""
   }
-
-///if the array is empty, show all the articles, if the array is populated, render conditionally
-
-// method 1: create the tag first, and then create a joiner with that tag ID
-// create a pure tag without any article associations
-// somehow pull in the specific article that we want to create a tag for
-// AND THEN create a joiner instance
-
-  // identify tag_id from the joiner
 
   addNewTag = (newTag, articleId) => {
     fetch(`http://localhost:3000/tags`, {
@@ -41,7 +31,6 @@ class App extends React.Component {
       .then(response => response.json())
       .then((responseObject) => {
         console.log(responseObject)
-        // let updatedArticlesList = [...this.state.articles, responseObject]
         let copyOfArticles = this.state.articles.map((article) => {
           if (article.id === articleId) {
             return responseObject.article
@@ -77,12 +66,11 @@ class App extends React.Component {
 
   decideWhichArrayToRender = () => {
     // console.log("STATE LOG", this.state)
-    let anArray = [...this.state.articles]
-    let { covidCheck, selectedTag, searchTerm } = this.state
-    // let coronaKeywords = ["coronavirus", "covid-19", "virus"]
+    let { covidCheck, searchTerm, articles } = this.state
+    let anArray = [...articles]
 
     if (covidCheck === true) {
-      anArray = this.state.articles.filter((article) => {
+      anArray = articles.filter((article) => {
         return article.description === null
         ?
         !article.title.toLowerCase().includes("coronavirus")
@@ -90,7 +78,7 @@ class App extends React.Component {
         !article.title.toLowerCase().includes("coronavirus") && !article.description.toLowerCase().includes("coronavirus")
       })
     } else if (covidCheck === false) {
-      anArray = this.state.articles.filter((article) => {
+      anArray = articles.filter((article) => {
         return article.description === null
           ?
           null
@@ -98,10 +86,13 @@ class App extends React.Component {
           article.description.toLowerCase().includes(searchTerm.toLowerCase())
           || article.title.toLowerCase().includes(searchTerm.toLowerCase())
       })
-    } else if (selectedTag === "") {
-      return anArray
+    } else {
+      anArray = articles.filter((article) => {
+        return article.joiners.map((joiner) =>
+           `#${joiner.tag_name}` === searchTerm
+        )
+      })
     }
-    // write another else if statement to filter for tag values
     return anArray
   }
 
@@ -125,7 +116,7 @@ class App extends React.Component {
 
   render(){
 
-    console.log("STATE CONSOLE LOG", this.state.articles)
+    // console.log("STATE CONSOLE LOG", this.state.articles)
     // console.log("searchresult:", this.decideWhichArrayToRender())
 
     return (
