@@ -1,5 +1,6 @@
 .App {
   margin: 100px;
+  font-family: 'Karla', sans-serif;
 }
 
 body {
@@ -97,12 +98,14 @@ form.new-tag {
   border-radius: 6px;
 }
 
-h1 {
+h1.header {
   font-size: 48px;
+  font-family: "Karla", sans-serif;
 }
 
-h2 {
-  font-size: 24px
+h2.header {
+  font-size: 24px;
+  font-family: "Karla", sans-serif;
 }
 
 h3 {

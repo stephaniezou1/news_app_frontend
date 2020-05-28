@@ -10,7 +10,7 @@ class CovidToggle extends Component {
     return (
       <>
         <form className="toggle">
-          <label><h2>Show Coronavirus news?</h2><p>Check to hide.</p></label>
+          <label><h2 className="header">Show Coronavirus news?</h2><p>Check to hide.</p></label>
           <label> 
             <input 
               type="checkbox" 

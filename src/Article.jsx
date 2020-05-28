@@ -41,12 +41,12 @@ export default class Article extends Component {
     return (
       <div className = "card">
 
-        <div class="image">
+        <div className="image">
           <a href = { url } target="blank"><img src = { url_to_image } /></a>
         </div>
 
         <div className = "content">
-          <div class="meta">
+          <div className="meta">
             <h5>{ source_name }</h5>
           </div>
           <h2>{ title }</h2>
@@ -59,8 +59,8 @@ export default class Article extends Component {
         </div>
         
         <div className="extra content">
-          <div class="ui large transparent left icon input">
-            <i class="tags icon"></i>
+          <div className="ui large transparent left icon input">
+            <i className="tags icon"></i>
             <input type="text" placeholder="Add a new tag" />
           </div>
         </div>

@@ -117,7 +117,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <h1>The Hegel Bagel 📖</h1>
+        <h1 className="header">The Hegel Bagel 📖</h1>
         <TagsContainer 
           tags={this.state.allTags}
         />
