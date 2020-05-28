@@ -12,10 +12,11 @@ class App extends React.Component {
     searchTerm: "",
     covidCheck: false,
     allTags: [],
-    arrayOfThingsToCheckFor: []
+    arrayOfThingsToCheckFor: [],
+    selectedTag: ""
   }
 
-  ///if the array is empty, show all the articles, if the array is populated, render conditionally
+///if the array is empty, show all the articles, if the array is populated, render conditionally
 
 // method 1: create the tag first, and then create a joiner with that tag ID
 // create a pure tag without any article associations
@@ -73,22 +74,30 @@ class App extends React.Component {
   decideWhichArrayToRender = () => {
     // console.log("STATE LOG", this.state)
     let anArray = [...this.state.articles]
+    let { covidCheck, selectedTag, searchTerm } = this.state
     // let coronaKeywords = ["coronavirus", "covid-19", "virus"]
 
-    if (this.state.covidCheck) {
+    if (covidCheck === true) {
       anArray = this.state.articles.filter((article) => {
-        return !article.description.toLowerCase().includes("coronavirus")
+        return article.description === null
+        ?
+        !article.title.toLowerCase().includes("coronavirus")
+        :
+        !article.title.toLowerCase().includes("coronavirus") && !article.description.toLowerCase().includes("coronavirus")
       })
-    } else {
+    } else if (covidCheck === false) {
       anArray = this.state.articles.filter((article) => {
         return article.description === null
           ?
           null
           :
-          article.description.toLowerCase().includes(this.state.searchTerm.toLowerCase())
-          || article.title.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+          article.description.toLowerCase().includes(searchTerm.toLowerCase())
+          || article.title.toLowerCase().includes(searchTerm.toLowerCase())
       })
+    } else if (selectedTag === "") {
+      return anArray
     }
+    // write another else if statement to filter for tag values
     return anArray
   }
 
@@ -117,9 +126,10 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <h1>The Hegel Bagel 📖</h1>
+        <h1 className="header">The Hegel Bagel 📖</h1>
         <TagsContainer 
           tags={this.state.allTags}
+          handleSearchTerm={this.handleSearchTerm}
         />
         <CovidToggle
           covidCheck = {this.state.covidCheck}

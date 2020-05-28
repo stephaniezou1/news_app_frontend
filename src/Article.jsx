@@ -21,44 +21,47 @@ export default class Article extends Component {
   }
 
   render() {
-    // turn the published_at value into a string so that we can format it
-    let object = this.props.article
-    let dateString = JSON.stringify(object.published_at)
-    // console.log(dateString)
-
     let { title, author, description, source_name, published_at, url, url_to_image } = this.props.article 
 
-    let tagsArray = this.props.article.joiners.map((tag) => {
-      return <Tag 
-        tag={tag.tag_name}
-        key={tag.tag_id}
-      />
+    let tagsArray = this.props.article.joiners.map((joiner) => {
+      // return <Tag 
+      //   tag={joiner.tag_name}
+      //   key={joiner.tag_id}
+      // />
+      return <button className="tag" key={joiner.tag_id}>#{ joiner.tag_name }</button>
     })
 
     // console.log("see here", tagsArray)
-
     // console.log("ARTICLE CONSOLE LOG", this.props.article)
     return (
-      <div className = "article-card">
-        <a href = { url } target="blank">
-          <img src = { url_to_image } />
-        </a>
-        <div className = "card-container">
-          <h5>{ source_name }</h5>
-          <h2>{ title }</h2>
+        <div className = "card">
 
-          { author === null || author === "" ? <h3>By {source_name}</h3> : <h3>By { author }</h3>}
-          <h5>{ published_at }</h5>
+        <div className="image">
+          <a href = { url } target="blank"><img src = { url_to_image } /></a>
+        </div>
 
+        <div className="meta">
+          <h5 className="header">{ source_name }</h5>
         </div>
-        <div className="description">
-          <h4>Description</h4>
-          <p>{ description }</p>
-        </div>
+        <h2 className="header">{ title }</h2>
+        { author === null || author === "" ? <h3 className="header">By {source_name}</h3> : <h3 className="header">By { author }</h3>}
+        <h5 className="header" id="date">{ published_at }</h5>
+
         <div className="article-tag">
-          {tagsArray}
+          { tagsArray }
         </div>
-        <form className="new-tag" onSubmit={this.handleSubmit}>
+        
+        <div className="extra content">
+          <div className="ui large transparent left icon input">
+            <i className="tags icon"></i>
+            <input type="text" placeholder="Add a new tag" />
+          </div>
+        </div>
+
+        {/* <h4>Description</h4>
+          <p>{ description }</p> */}
+        
+        {/* <form className="new-tag" onSubmit={this.handleSubmit}>
           <label>
             Add a #tag
           </label>
@@ -70,7 +73,8 @@ export default class Article extends Component {
             onChange={this.handleChange}
           />
           <input className="new-tag-submit" type="submit" value="Create tag" />
-      </form>
+        </form> */}
+
       </div>
     )
   }

@@ -9,17 +9,17 @@ class CovidToggle extends Component {
   render() {
     return (
       <>
-        <form className="toggle">
-          <label><h2>Show Coronavirus news?</h2><p>Check to hide.</p></label>
-          <label> 
-            <input 
-              type="checkbox" 
-              name="name" 
-              id="toggle" 
-              checked={this.props.covidCheck}
-              onChange={this.handleToggle}/>
-          </label>
-        </form>
+      <form className="toggle">
+        <label><h2 className="header">Hide Coronavirus news</h2></label>
+        <label> 
+          <input 
+            type="checkbox" 
+            name="name" 
+            id="toggle" 
+            checked={this.props.covidCheck}
+            onChange={this.handleToggle}/>
+        </label>
+      </form>
       </>
     )
   }
