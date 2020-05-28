@@ -16,7 +16,7 @@ class TagsContainer extends Component {
     return (
       <div className="tag-list">
         <h2 className="header">Article Tags</h2>
-        <div>
+        <div className="tags">
           {tagArr}
         </div>
       </div>

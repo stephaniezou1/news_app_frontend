@@ -36,23 +36,20 @@ export default class Article extends Component {
     })
 
     // console.log("see here", tagsArray)
-
     // console.log("ARTICLE CONSOLE LOG", this.props.article)
     return (
-      <div className = "card">
+        <div className = "card">
 
         <div className="image">
           <a href = { url } target="blank"><img src = { url_to_image } /></a>
         </div>
 
-        <div className = "content">
-          <div className="meta">
-            <h5>{ source_name }</h5>
-          </div>
-          <h2>{ title }</h2>
-          { author === null || author === "" ? <h3>By {source_name}</h3> : <h3>By { author }</h3>}
-          <h5>{ published_at }</h5>
+        <div className="meta">
+          <h5 className="header">{ source_name }</h5>
         </div>
+        <h2 className="header">{ title }</h2>
+        { author === null || author === "" ? <h3 className="header">By {source_name}</h3> : <h3 className="header">By { author }</h3>}
+        <h5 className="header" id="date">{ published_at }</h5>
 
         <div className="article-tag">
           {tagsArray}
