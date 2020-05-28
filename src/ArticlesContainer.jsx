@@ -14,7 +14,7 @@ class ArticlesContainer extends Component {
     })
 
     return (
-      <div className = "article-list"> 
+      <div className = "ui link cards"> 
         { articlesArr }
       </div>
     )

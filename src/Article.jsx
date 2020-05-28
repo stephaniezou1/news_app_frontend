@@ -39,26 +39,36 @@ export default class Article extends Component {
 
     // console.log("ARTICLE CONSOLE LOG", this.props.article)
     return (
-      <div className = "article-card">
-        <a href = { url } target="blank">
-          <img src = { url_to_image } />
-        </a>
-        <div className = "card-container">
-          <h5>{ source_name }</h5>
-          <h2>{ title }</h2>
+      <div className = "card">
 
+        <div class="image">
+          <a href = { url } target="blank"><img src = { url_to_image } /></a>
+        </div>
+
+        <div className = "content">
+          <div class="meta">
+            <h5>{ source_name }</h5>
+          </div>
+          <h2>{ title }</h2>
           { author === null || author === "" ? <h3>By {source_name}</h3> : <h3>By { author }</h3>}
           <h5>{ published_at }</h5>
+        </div>
 
-        </div>
-        <div className="description">
-          <h4>Description</h4>
-          <p>{ description }</p>
-        </div>
         <div className="article-tag">
           {tagsArray}
         </div>
-        <form className="new-tag" onSubmit={this.handleSubmit}>
+        
+        <div className="extra content">
+          <div class="ui large transparent left icon input">
+            <i class="tags icon"></i>
+            <input type="text" placeholder="Add a new tag" />
+          </div>
+        </div>
+
+        {/* <h4>Description</h4>
+          <p>{ description }</p> */}
+        
+        {/* <form className="new-tag" onSubmit={this.handleSubmit}>
           <label>
             Add a #tag
           </label>
@@ -70,7 +80,8 @@ export default class Article extends Component {
             onChange={this.handleChange}
           />
           <input className="new-tag-submit" type="submit" value="Create tag" />
-      </form>
+        </form> */}
+
       </div>
     )
   }

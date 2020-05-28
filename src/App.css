@@ -124,7 +124,7 @@ h2, h3, h4, p {
 }
 
 img {
-  width: 500px;
+  width: 100%;
   object-fit: cover;
   border-radius: 6px 6px 0px 0px;
 }
