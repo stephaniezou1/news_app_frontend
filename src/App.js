@@ -129,7 +129,7 @@ class App extends React.Component {
     // console.log("searchresult:", this.decideWhichArrayToRender())
 
     return (
-      
+  
       <div className="App">
         <h1 className="header">The Hegel Bagel 📖</h1>
         <TagsContainer 

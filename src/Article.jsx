@@ -21,26 +21,26 @@ class Article extends Component {
     evt.target.reset()
   }
 
-  handleDelete = (tagToBeDeleted) => {
-    let newArticleTags = []
-    this.props.article.joiners.map((joiner) => {
-      if (joiner.tag_id === tagToBeDeleted.id) {
-        newArticleTags = this.props.article.joiners.filter(tag => tag !== tagToBeDeleted)
-      }
-    })
-    return newArticleTags  
-  }
+  // handleDelete = (tagToBeDeleted) => {
+  //   let newArticleTags = []
+  //   this.props.article.joiners.map((joiner) => {
+  //     if (joiner.tag_id === tagToBeDeleted.id) {
+  //       newArticleTags = this.props.article.joiners.filter(tag => tag !== tagToBeDeleted)
+  //     }
+  //   })
+  //   return newArticleTags  
+  // }
 
-  deleteATag = (idOfJoinerFromArticle) => {
-    fetch(`http://localhost:3000/joiners/${idOfJoinerFromArticle}`, {
-      method: "DELETE"
-    })
-      .then(resp => resp.json())
-      .then((deletedTag) => {
+  // deleteATag = (idOfJoinerFromArticle) => {
+  //   fetch(`http://localhost:3000/joiners/${idOfJoinerFromArticle}`, {
+  //     method: "DELETE"
+  //   })
+  //     .then(resp => resp.json())
+  //     .then((deletedTag) => {
 
-        handleDelete(deletedTag)
-      })
-  } 
+  //       handleDelete(deletedTag)
+  //     })
+  // } 
 
   render() {
 
@@ -50,7 +50,7 @@ class Article extends Component {
     let tagsArray = this.props.article.joiners.map((joiner) => {
       return <div> 
         <button className="tag" key={joiner.tag_id}>#{ joiner.tag_name }</button>
-        <button onChange={this.deleteATag}>x</button> 
+        {/* <button onChange={this.deleteATag}>x</button>  */}
       </div>
     })
 
@@ -60,7 +60,9 @@ class Article extends Component {
         <div className = "card">
 
         <div className="image">
-          <a href = { url } target="blank"><img src = { url_to_image } /></a>
+          {/* <a href = { url } target="blank"> */}
+            <img src = { url_to_image } />
+            {/* </a> */}
         </div>
 
         <div className="meta">
