@@ -13,7 +13,7 @@ class TagsContainer extends Component {
       />
     })
 
-    console.log("check this out", this.props.tags)
+    // console.log("check this out", this.props.tags)
 
     return (
       <div className="tag-list">
