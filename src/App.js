@@ -4,7 +4,6 @@ import ArticlesContainer from './ArticlesContainer.jsx'
 import SearchArticles from './SearchArticles.jsx'
 import TagsContainer from './TagsContainer.jsx'
 import CovidToggle from './CovidToggle.jsx'
-import Article from './Article'
 
 class App extends React.Component {
 
@@ -13,7 +12,13 @@ class App extends React.Component {
     searchTerm: "",
     covidCheck: false,
     allTags: [],
-    arrayOfThingsToCheckFor: [],
+    filterTerm: ""
+  }
+
+  handleFilterTerm = (filterFromChild) => {
+    this.setState({
+      filterTerm: filterFromChild
+    })
   }
 
   formatDateTime(date) {
@@ -91,7 +96,7 @@ class App extends React.Component {
   }
 
   decideWhichArrayToRender = () => {
-    let { covidCheck, searchTerm, articles } = this.state
+    let { covidCheck, searchTerm, articles, filterTerm } = this.state
     let anArray = [...articles]
 
     if (covidCheck === true) {
@@ -102,6 +107,7 @@ class App extends React.Component {
         :
         !article.title.toLowerCase().includes("coronavirus") && !article.description.toLowerCase().includes("coronavirus")
       })
+
     } else if (covidCheck === false) {
       anArray = articles.filter((article) => {
         return article.description === null
@@ -111,25 +117,33 @@ class App extends React.Component {
           article.description.toLowerCase().includes(searchTerm.toLowerCase())
           || article.title.toLowerCase().includes(searchTerm.toLowerCase())
       })
+
+    } else if (filterTerm !== "") {
+      anArray = articles.map((article) => {
+        return article.joiners.filter((joiner) => {
+          joiner.filter((joiner) => {
+            return joiner.tag_name === filterTerm
+          })
+        })
+      })
     }
     return anArray
   }
 
-  pickArticles = () => {
-    let { searchTerm, articles } = this.state
-    let newArray = [...articles]
-
-    if (searchTerm === "") {
-      return newArray
-    } else {
-      newArray = articles.filter((article) => {
-        article.joiners.map((joiner) => {
-          return joiner.tag_name === searchTerm.replace(/[^A-Za-z0-9_]/g,"")
-        })
-      })
-    }
-    return newArray
-  }
+  // pickArticles = () => {
+  //   let { searchTerm, articles } = this.state
+  //   let newArray = [...articles]
+  //   if (searchTerm === "") {
+  //     return newArray
+  //   } else {
+  //     newArray = articles.filter((article) => {
+  //       article.joiners.map((joiner) => {
+  //         return joiner.tag_name === searchTerm.replace(/[^A-Za-z0-9_]/g,"")
+  //       })
+  //     })
+  //   }
+  //   return newArray
+  // }
 
   componentDidMount() {
     fetch("http://localhost:3000/articles")
@@ -150,13 +164,18 @@ class App extends React.Component {
 
   render(){
 
+    console.log("filter term:", this.state.filterTerm)
+    console.log("article:", this.state.articles)
+
+
     return (
   
       <div className="App">
-        <h1 className="header">The Hegel Bagel 📖</h1>
+        <h1 className="header">Hegelian Bagel 🥯</h1>
         <TagsContainer 
           tags={this.state.allTags}
           handleSearchTerm={this.handleSearchTerm}
+          handleFilterTerm={this.handleFilterTerm}
         />
         <CovidToggle
           covidCheck = {this.state.covidCheck}

@@ -10,6 +10,7 @@ class TagsContainer extends Component {
         key={tag.id}
         tag={tag}
         handleSearchTerm={this.props.handleSearchTerm}
+        handleFilterTerm={this.props.handleFilterTerm}
       />
     })
 

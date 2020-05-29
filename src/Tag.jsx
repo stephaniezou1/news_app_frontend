@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 class Tag extends Component {
 
   handleTagFilter = (event) => {
-    this.props.handleSearchTerm(event.target.innerText)
+    this.props.handleFilterTerm(event.target.innerText)
     console.log(event.target.innerText)
   }
 
@@ -12,7 +12,7 @@ class Tag extends Component {
   return (
     <>
       <button className="tag" onClick={this.handleTagFilter}>
-        #{ content } 
+        { content } 
       </button>
     </>
   )
