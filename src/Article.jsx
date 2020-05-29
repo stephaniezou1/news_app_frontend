@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import Tag from './Tag.jsx'
-// import { Button, Checkbox, Form } from 'semantic-ui-react'
+// import Tag from './Tag.jsx'
+import TagForm from './TagForm.jsx'
 
 class Article extends Component {
 
   state = {
-    newTag: ""
+    newTag: "",
+    displayTagEdit: false,
   }
 
   handleChange = (evt) => {
@@ -23,30 +24,25 @@ class Article extends Component {
     })
   }
 
-  handleDelete = (joinerId) => {
-    fetch(`http://localhost:3000/joiners/${joinerId}`, {
-      method: "DELETE"
+  handleDisplayTagEdit = () => {
+    this.setState({
+      displayTagEdit: !this.state.displayTagEdit
     })
-      .then(resp => resp.json())
-      .then((updatedArticle) => {
-        this.props.deleteATag(updatedArticle, joinerId)
-      })
-  } 
+  }
 
   render() {
-
-    // console.log("article joiners", this.props.article.joiners)
-    let { title, author, source_name, published_at, url, url_to_image } = this.props.article 
+    let { title, author, source_name, published_at, url, url_to_image, joiners } = this.props.article 
+    let { displayTagEdit } = this.state
 
     let tagsArray = this.props.article.joiners.map((joiner) => {
-      return <div> 
-        <button className="tag" key={joiner.id}>#{ joiner.tag_name }</button>
-        <button onClick={(evt) => {
-          this.handleDelete(joiner.id)
-        }}>x</button> 
+      return <div key={joiner.id}> 
+        <button
+          className="tag"
+          key={joiner.id}>
+            #{ joiner.tag_name }
+        </button>
       </div>
     })
-
     
     return (
         <div className = "card">
@@ -60,35 +56,34 @@ class Article extends Component {
         </div>
         <h2 className="header">{ title }</h2>
         { author === null || author === "" ? <h3 className="header">By {source_name}</h3> : <h3 className="header">By { author }</h3>}
-        <h5 className="header" id="date">{ published_at }</h5>
+        <h5 className="header" id="date">
+          {/* { this.props.formatDateTime(published_at) } */}
+          { published_at }
+        </h5>
 
         <div className="article-tag">
           { tagsArray }
         </div>
         
-        {/* <h4>Description</h4>
-          <p>{ description }</p> */}
-        
-        <form className="new-tag" onSubmit={this.handleSubmit}>
-          <h5>
-            Add a #tag
-          </h5>
-          <input
-            className="new-tag" 
-            type="text" 
-            name="newTag"
-            value={this.state.newTag} 
-            onChange={this.handleChange}
-            autoComplete="off"
-            placeholder="#"
-          />
-          <input 
-            className="new-tag-submit" 
-            type="submit" 
-            value="Create tag" 
-          />
-        </form>
+        <button
+          onClick={this.handleDisplayTagEdit}
+          className="tag-toggle"
+          id="edit"
+        >
+          Edit tags
+        </button>
 
+        { displayTagEdit
+          ?
+          <TagForm
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          deleteATag = {this.props.deleteATag}
+          newTag={this.state.newTag}
+          joiners={joiners}/>
+          :
+          null
+        }
       </div>
     )
   }

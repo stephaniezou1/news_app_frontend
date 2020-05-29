@@ -16,17 +16,34 @@ class App extends React.Component {
     arrayOfThingsToCheckFor: [],
   }
 
-deleteATag = (updatedArticleFromChild, joinerId) => {
+  formatDateTime(date) {
+    let year = date.getFullYear()
+    let day = date.getDate()
+    let months = [
+      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+    ]
+    let monthName = months[date.getMonth()]
+    let formattedDate = `${monthName} ${day}, ${year}`
+    return formattedDate
+  }
+
+  formatString = (string) => {
+    return string.replace(/[^A-Za-z0-9_]/g,"");
+  }
+
+  deleteATag = (updatedArticleFromChild, joinerId) => {
     console.log("UPDATED ARTICLE", updatedArticleFromChild)
     let copyOfAllArticles = this.state.articles.filter((article) => article.id !== updatedArticleFromChild)
-    // let copyOfAllTags = this.state.allTags.filter((tag) => tag.id !== updatedArticleFromChild.joinerId)
+    let copyOfAllTags = this.state.allTags.filter((tag) =>
+      tag.id !== updatedArticleFromChild.joinerId
+    )
     this.setState({
-      articles: copyOfAllArticles
-      // allTags: copyOfAllTags
+      articles: copyOfAllArticles,
+      allTags: copyOfAllTags
     })
   }
 
-addNewTag = (newTag, articleId) => {
+  addNewTag = (newTag, articleId) => {
     fetch(`http://localhost:3000/tags`, {
       method: "POST",
       headers: {
@@ -74,7 +91,6 @@ addNewTag = (newTag, articleId) => {
   }
 
   decideWhichArrayToRender = () => {
-    // console.log("STATE LOG", this.state)
     let { covidCheck, searchTerm, articles } = this.state
     let anArray = [...articles]
 
@@ -95,21 +111,30 @@ addNewTag = (newTag, articleId) => {
           article.description.toLowerCase().includes(searchTerm.toLowerCase())
           || article.title.toLowerCase().includes(searchTerm.toLowerCase())
       })
-    } else {
-      anArray = articles.filter((article) => {
-        return article.joiners.map((joiner) =>
-           `#${joiner.tag_name}` === searchTerm
-        )
-      })
     }
     return anArray
+  }
+
+  pickArticles = () => {
+    let { searchTerm, articles } = this.state
+    let newArray = [...articles]
+
+    if (searchTerm === "") {
+      return newArray
+    } else {
+      newArray = articles.filter((article) => {
+        article.joiners.map((joiner) => {
+          return joiner.tag_name === searchTerm.replace(/[^A-Za-z0-9_]/g,"")
+        })
+      })
+    }
+    return newArray
   }
 
   componentDidMount() {
     fetch("http://localhost:3000/articles")
     .then(r => r.json())
     .then((newArticles) => {
-      // console.log("SEE HERE", newArticles)
       this.setState({
         articles: newArticles
       })
@@ -124,9 +149,6 @@ addNewTag = (newTag, articleId) => {
   }
 
   render(){
-
-    // console.log("STATE CONSOLE LOG", this.state.articles)
-    // console.log("searchresult:", this.decideWhichArrayToRender())
 
     return (
   
@@ -146,8 +168,10 @@ addNewTag = (newTag, articleId) => {
         />
         <ArticlesContainer 
           articles={this.decideWhichArrayToRender()}
+          // articles={this.pickArticles()}
           addNewTag={this.addNewTag}
           deleteATag={this.deleteATag}
+          formatDateTime={this.formatDateTime}
         />
       </div>
     );
