@@ -31,7 +31,8 @@ class Article extends Component {
   }
 
   render() {
-    let { title, author, source_name, published_at, url, url_to_image, joiners } = this.props.article 
+    console.log("likes:", this.props.article.likes)
+    let { title, author, source_name, published_at, url, url_to_image, joiners, likes } = this.props.article 
     let { displayTagEdit } = this.state
 
     let tagsArray = this.props.article.joiners.map((joiner) => {
@@ -84,6 +85,11 @@ class Article extends Component {
           :
           null
         }
+        <span class="like-button">
+            <i class="heart outline like icon"></i>
+              {likes} likes
+         </span>
+
       </div>
     )
   }

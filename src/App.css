@@ -162,3 +162,8 @@ select.select-tag {
   border: 1px solid #ccc;
   margin: 0px 16px
 }
+
+.like-button {
+  text-align: right;
+  padding: 12px 14px;
+}
