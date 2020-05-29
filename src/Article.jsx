@@ -39,7 +39,7 @@ class Article extends Component {
         <button
           className="tag"
           key={joiner.id}>
-            #{ joiner.tag_name }
+            { joiner.tag_name }
         </button>
       </div>
     })

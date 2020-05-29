@@ -171,18 +171,19 @@ class App extends React.Component {
   
       <div className="App">
         <h1 className="header">Hegelian Bagel 🥯</h1>
+        
         <TagsContainer 
           tags={this.state.allTags}
           handleSearchTerm={this.handleSearchTerm}
           handleFilterTerm={this.handleFilterTerm}
         />
-        <CovidToggle
-          covidCheck = {this.state.covidCheck}
-          handleCovidCheck={this.handleCovidCheck}
-        />
         <SearchArticles 
           searchTerm={this.state.searchTerm}
           handleSearchTerm={this.handleSearchTerm}
+        />
+        <CovidToggle
+          covidCheck = {this.state.covidCheck}
+          handleCovidCheck={this.handleCovidCheck}
         />
         <ArticlesContainer 
           articles={this.decideWhichArrayToRender()}

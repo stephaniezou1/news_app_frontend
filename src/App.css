@@ -95,9 +95,9 @@ input.search {
 }
 
 h1.header {
-  font-size: 48px;
+  font-size: 52px;
   font-family: "Karla", sans-serif;
-  margin: 0px;
+  margin: 40px 0px;
 }
 
 h2.header {
@@ -205,4 +205,8 @@ a.link {
 a.link:hover {
   color: white !important;
   opacity: 0.5 !important;
+}
+
+.ui.slider.checkbox {
+  margin: 20px 0px;
 }
