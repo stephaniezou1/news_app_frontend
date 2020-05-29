@@ -43,9 +43,8 @@ class Article extends Component {
   }
 
   render() {
-    let { title, author, source_name, published_at, url, url_to_image } = this.props.article 
+    let { title, author, source_name, published_at, url, url_to_image, joiners } = this.props.article 
     let { displayTagEdit } = this.state
-    console.log(displayTagEdit)
 
     let tagsArray = this.props.article.joiners.map((joiner) => {
       return <div key={joiner.id}> 
@@ -92,7 +91,8 @@ class Article extends Component {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
           handleDelete={this.handleDelete}
-          newTag={this.state.newTag}/>
+          newTag={this.state.newTag}
+          joiners={joiners}/>
           :
           null
         }
