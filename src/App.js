@@ -99,7 +99,7 @@ class App extends React.Component {
     let { covidCheck, searchTerm, articles, filterTerm } = this.state
     let anArray = [...articles]
 
-    if (covidCheck === true) {
+    if (covidCheck) {
       anArray = articles.filter((article) => {
         return article.description === null
         ?
@@ -108,7 +108,7 @@ class App extends React.Component {
         !article.title.toLowerCase().includes("coronavirus") && !article.description.toLowerCase().includes("coronavirus")
       })
 
-    } else if (covidCheck === false) {
+    } else if (!covidCheck) {
       anArray = articles.filter((article) => {
         return article.description === null
           ?
@@ -117,33 +117,33 @@ class App extends React.Component {
           article.description.toLowerCase().includes(searchTerm.toLowerCase())
           || article.title.toLowerCase().includes(searchTerm.toLowerCase())
       })
-
-    } else if (filterTerm !== "") {
-      anArray = articles.map((article) => {
-        return article.joiners.filter((joiner) => {
-          joiner.filter((joiner) => {
-            return joiner.tag_name === filterTerm
-          })
-        })
-      })
+    // } else if (filterTerm !== "") {
+    //   anArray = articles.filter((article) => {
+    //     return article.joiners.map((joiner) => {
+    //       joiner.filter((joiner) => {
+    //         return joiner.tag_name === filterTerm
+    //       })
+    //     })
+    //   })
     }
     return anArray
   }
 
-  // pickArticles = () => {
-  //   let { searchTerm, articles } = this.state
-  //   let newArray = [...articles]
-  //   if (searchTerm === "") {
-  //     return newArray
-  //   } else {
-  //     newArray = articles.filter((article) => {
-  //       article.joiners.map((joiner) => {
-  //         return joiner.tag_name === searchTerm.replace(/[^A-Za-z0-9_]/g,"")
-  //       })
-  //     })
-  //   }
-  //   return newArray
-  // }
+
+  pickArticles = () => {
+    let { searchTerm, articles } = this.state
+    let newArray = [...articles]
+    if (searchTerm === "") {
+      return newArray
+    } else {
+      newArray = articles.filter((article) => {
+        article.joiners.map((joiner) => {
+          return joiner.tag_name === searchTerm.replace(/[^A-Za-z0-9_]/g,"")
+        })
+      })
+    }
+    return newArray
+  }
 
   componentDidMount() {
     fetch("http://localhost:3000/articles")
