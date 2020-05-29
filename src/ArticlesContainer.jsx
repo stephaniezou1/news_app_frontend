@@ -11,6 +11,7 @@ class ArticlesContainer extends Component {
         addNewTag = {this.props.addNewTag}
         deleteATag = {this.props.deleteATag}
         formatDateTime = {this.props.formatDateTime}
+        addALike = {this.props.addALike}
      />)
     })
 
