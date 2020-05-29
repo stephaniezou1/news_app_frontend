@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import Tag from './Tag.jsx'
 import TagForm from './TagForm.jsx'
 
 class Article extends Component {

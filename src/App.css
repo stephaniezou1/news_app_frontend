@@ -61,7 +61,7 @@ div.article-tag {
   border-radius: 6px;
   padding: 8px 14px;
   margin: 6px;
-  background-color: rgb(116, 52, 17);
+  background-color: rgb(145, 76, 55);
   color: white;
   font-weight: 700;
   border: none;
@@ -166,4 +166,43 @@ select.select-tag {
 .like-button {
   text-align: right;
   padding: 12px 14px;
+}
+
+div.ui.container {
+  background-color: rgb(145, 76, 55);
+  color: white;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  border-radius: 4px;
+  padding: 18px 0px;
+  width: 100% !important;
+  display: inline-table;
+}
+
+h4#header-link {
+  font-family: "Karla", sans-serif;
+  font-size: 16px;
+  float: right;
+  color: white;
+  margin: 0px;
+  padding: 4px 20px;
+}
+
+h4#contributors {
+  font-family: "Karla", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  float: left;
+  margin: 0px;
+  padding: 4px 20px;
+}
+
+a.link {
+  color: white;
+  font-weight: 900;
+}
+
+a.link:hover {
+  color: white !important;
+  opacity: 0.5 !important;
 }

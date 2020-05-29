@@ -4,6 +4,7 @@ import ArticlesContainer from './ArticlesContainer.jsx'
 import SearchArticles from './SearchArticles.jsx'
 import TagsContainer from './TagsContainer.jsx'
 import CovidToggle from './CovidToggle.jsx'
+import Header from './Header.jsx'
 
 class App extends React.Component {
 
@@ -129,7 +130,6 @@ class App extends React.Component {
     return anArray
   }
 
-
   pickArticles = () => {
     let { searchTerm, articles } = this.state
     let newArray = [...articles]
@@ -167,7 +167,6 @@ class App extends React.Component {
     console.log("filter term:", this.state.filterTerm)
     console.log("article:", this.state.articles)
 
-
     return (
   
       <div className="App">
@@ -192,6 +191,7 @@ class App extends React.Component {
           deleteATag={this.deleteATag}
           formatDateTime={this.formatDateTime}
         />
+        <Header />
       </div>
     );
   }
