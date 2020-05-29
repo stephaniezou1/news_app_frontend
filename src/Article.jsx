@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import Tag from './Tag.jsx'
+import TagFrom from './TagForm.jsx'
+import TagForm from './TagForm.jsx'
 // import { Button, Checkbox, Form } from 'semantic-ui-react'
 
 class Article extends Component {
 
   state = {
-    newTag: ""
+    newTag: "",
+    displayTagEdit: false,
   }
 
   handleChange = (evt) => {
@@ -31,10 +34,18 @@ class Article extends Component {
       .then((updatedArticle) => {
         this.props.deleteATag(updatedArticle, joinerId)
       })
-  } 
+  }
+
+  handleDisplayTagEdit = () => {
+    this.setState({
+      displayTagEdit: !this.state.displayTagEdit
+    })
+  }
 
   render() {
     let { title, author, source_name, published_at, url, url_to_image } = this.props.article 
+    let { displayTagEdit } = this.state
+    console.log(displayTagEdit)
 
     let tagsArray = this.props.article.joiners.map((joiner) => {
       return <div key={joiner.id}> 
@@ -67,29 +78,18 @@ class Article extends Component {
           { tagsArray }
         </div>
         
-        {/* <h4>Description</h4>
-          <p>{ description }</p> */}
-        
-        <form className="new-tag" onSubmit={this.handleSubmit}>
-          <h5>
-            Add a #tag
-          </h5>
-          <input
-            className="new-tag" 
-            type="text" 
-            name="newTag"
-            value={this.state.newTag} 
-            onChange={this.handleChange}
-            autoComplete="off"
-            placeholder="#"
-          />
-          <input 
-            className="new-tag-submit" 
-            type="submit" 
-            value="Create tag" 
-          />
-        </form>
+        <button onClick={this.handleDisplayTagEdit}>Edit tags</button>
 
+        { displayTagEdit
+          ?
+          <TagForm
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          handleDelete={this.handleDelete}
+          newTag={this.state.newTag}/>
+          :
+          null
+        }
       </div>
     )
   }
