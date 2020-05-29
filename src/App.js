@@ -16,7 +16,22 @@ class App extends React.Component {
     arrayOfThingsToCheckFor: [],
   }
 
-deleteATag = (updatedArticleFromChild, joinerId) => {
+  formatDateTime(date) {
+    let year = date.getFullYear()
+    let day = date.getDate()
+    let months = [
+      'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'
+    ]
+    let monthName = months[date.getMonth()]
+    let formattedDate = `${monthName} ${day}, ${year}`
+    return formattedDate
+  }
+
+  formatString = (string) => {
+    return string.replace(/[^A-Za-z0-9_]/g,"");
+  }
+
+  deleteATag = (updatedArticleFromChild, joinerId) => {
     console.log("UPDATED ARTICLE", updatedArticleFromChild)
     let copyOfAllArticles = this.state.articles.filter((article) => article.id !== updatedArticleFromChild)
     let copyOfAllTags = this.state.allTags.filter((tag) =>
@@ -28,7 +43,7 @@ deleteATag = (updatedArticleFromChild, joinerId) => {
     })
   }
 
-addNewTag = (newTag, articleId) => {
+  addNewTag = (newTag, articleId) => {
     fetch(`http://localhost:3000/tags`, {
       method: "POST",
       headers: {
@@ -100,10 +115,6 @@ addNewTag = (newTag, articleId) => {
     return anArray
   }
 
-  formatString = (string) => {
-    return string.replace(/[^A-Za-z0-9_]/g,"");
-  }
-
   pickArticles = () => {
     let { searchTerm, articles } = this.state
     let newArray = [...articles]
@@ -124,7 +135,6 @@ addNewTag = (newTag, articleId) => {
     fetch("http://localhost:3000/articles")
     .then(r => r.json())
     .then((newArticles) => {
-      // console.log("SEE HERE", newArticles)
       this.setState({
         articles: newArticles
       })
@@ -139,10 +149,6 @@ addNewTag = (newTag, articleId) => {
   }
 
   render(){
-
-    // console.log("STATE CONSOLE LOG", this.state.articles)
-    // console.log("searchresult:", this.decideWhichArrayToRender())
-    console.log(this.state.searchTerm.replace(/[^A-Za-z0-9_]/g,""))
 
     return (
   
@@ -165,6 +171,7 @@ addNewTag = (newTag, articleId) => {
           // articles={this.pickArticles()}
           addNewTag={this.addNewTag}
           deleteATag={this.deleteATag}
+          formatDateTime={this.formatDateTime}
         />
       </div>
     );
