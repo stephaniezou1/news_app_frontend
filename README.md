@@ -4,6 +4,8 @@ Hegelian Bagel 🥯
 Hegelian Bagel is a news app that brings you breaking news. Filter out Coronavirus-related news and add tags to articles.
 Made by [Isabel K. Lee](https://www.kleetime.com) and [Stephanie Zou](https://github.com/stephaniezou1).
 
+![Homepage of Hegelian Bagel](https://i.imgur.com/ze3yA2a.png)
+
 Live demo: coming soon...
 
 ## Features
