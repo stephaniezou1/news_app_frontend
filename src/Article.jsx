@@ -90,7 +90,6 @@ class Article extends Component {
           article={this.props.article}
           addALike={this.props.addALike}
         />
-
       </div>
     )
   }
