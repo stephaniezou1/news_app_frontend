@@ -2,22 +2,37 @@ import React, { Component } from 'react'
 
 class TagForm extends Component {
   state = {
-    value: "",
+    selectedTag: "",
     joiner_id: 0
   }
 
   handleChange = (event) => {
+    let joinerId = 0
+
+    this.props.joiners.map((joiner) => {
+      if (this.state.selectedTag === joiner.tag_name) {
+        joinerId = joiner.id
+      }
+    })
+
     this.setState({
-      value: event.target.value
+      selectedTag: event.target.value,
+      joiner_id: joinerId
     })
   }
 
-  render() {
-    let tagsArray = this.props.joiners.map((joiner) => {
-      return <option key={joiner.id} value={joiner.tag_name}>{joiner.tag_name}</option>
+  handleDelete = (event) => {
+    event.preventDefault()
+    fetch(`http://localhost:3000/joiners/${this.state.joiner_id}`, {
+      method: "DELETE"
     })
+      .then(resp => resp.json())
+      .then(console.log)
+  }
 
-    console.log(this.state.value)
+  render() {
+
+    console.log(this.state.selectedTag, this.props.joiners, this.state.joiner_id)
 
     return (
       <>
@@ -41,13 +56,20 @@ class TagForm extends Component {
         />
       </form>
 
-      <form className="new-tag" onSubmit={this.props.handleDelete}>
+      <form
+        className="new-tag"
+        onSubmit={this.handleDelete}
+      >
         <h3 className="header">
           Remove a #tag
         </h3>
-        <select value={this.state.value} onChange={this.handleChange}>
-          { tagsArray }
+
+        <select value={this.state.selectedTag} onChange={this.handleChange}>
+          { this.props.joiners.map((joiner) =>
+            <option key={joiner.id} value={joiner.tag_name}>{joiner.tag_name}</option>)
+          }
         </select>
+
         <input
           className="new-tag-submit" 
           type="submit" 

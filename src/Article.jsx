@@ -26,15 +26,15 @@ class Article extends Component {
     })
   }
 
-  handleDelete = (joinerId) => {
-    fetch(`http://localhost:3000/joiners/${joinerId}`, {
-      method: "DELETE"
-    })
-      .then(resp => resp.json())
-      .then((updatedArticle) => {
-        this.props.deleteATag(updatedArticle, joinerId)
-      })
-  }
+  // handleDelete = (joinerId) => {
+  //   fetch(`http://localhost:3000/joiners/${joinerId}`, {
+  //     method: "DELETE"
+  //   })
+  //     .then(resp => resp.json())
+  //     .then((updatedArticle) => {
+  //       this.props.deleteATag(updatedArticle, joinerId)
+  //     })
+  // }
 
   handleDisplayTagEdit = () => {
     this.setState({
@@ -53,9 +53,6 @@ class Article extends Component {
           key={joiner.id}>
             #{ joiner.tag_name }
         </button>
-        {/* <button onClick={(evt) => {
-          this.handleDelete(joiner.id)
-        }}>x</button>  */}
       </div>
     })
     
@@ -90,7 +87,8 @@ class Article extends Component {
           <TagForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-          handleDelete={this.handleDelete}
+          // handleDelete={this.handleDelete}
+          deleteATag = {this.props.deleteATag}
           newTag={this.state.newTag}
           joiners={joiners}/>
           :
