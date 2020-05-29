@@ -27,7 +27,9 @@ class TagForm extends Component {
       method: "DELETE"
     })
       .then(resp => resp.json())
-      .then(console.log)
+      .then((updatedArticle) => {
+        this.props.deleteATag(updatedArticle, this.state.joiner_id)
+      })
   }
 
   render() {

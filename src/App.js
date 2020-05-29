@@ -19,12 +19,12 @@ class App extends React.Component {
 deleteATag = (updatedArticleFromChild, joinerId) => {
     console.log("UPDATED ARTICLE", updatedArticleFromChild)
     let copyOfAllArticles = this.state.articles.filter((article) => article.id !== updatedArticleFromChild)
-    // let copyOfAllTags = this.state.allTags.filter((tag) =>
-    //   tag.id !== updatedArticleFromChild.joinerId
-    // )
+    let copyOfAllTags = this.state.allTags.filter((tag) =>
+      tag.id !== updatedArticleFromChild.joinerId
+    )
     this.setState({
       articles: copyOfAllArticles,
-      // allTags: copyOfAllTags
+      allTags: copyOfAllTags
     })
   }
 
@@ -76,7 +76,6 @@ addNewTag = (newTag, articleId) => {
   }
 
   decideWhichArrayToRender = () => {
-    // console.log("STATE LOG", this.state)
     let { covidCheck, searchTerm, articles } = this.state
     let anArray = [...articles]
 
@@ -162,8 +161,8 @@ addNewTag = (newTag, articleId) => {
           handleSearchTerm={this.handleSearchTerm}
         />
         <ArticlesContainer 
-          // articles={this.decideWhichArrayToRender()}
-          articles={this.pickArticles()}
+          articles={this.decideWhichArrayToRender()}
+          // articles={this.pickArticles()}
           addNewTag={this.addNewTag}
           deleteATag={this.deleteATag}
         />

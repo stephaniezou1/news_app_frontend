@@ -26,16 +26,6 @@ class Article extends Component {
     })
   }
 
-  // handleDelete = (joinerId) => {
-  //   fetch(`http://localhost:3000/joiners/${joinerId}`, {
-  //     method: "DELETE"
-  //   })
-  //     .then(resp => resp.json())
-  //     .then((updatedArticle) => {
-  //       this.props.deleteATag(updatedArticle, joinerId)
-  //     })
-  // }
-
   handleDisplayTagEdit = () => {
     this.setState({
       displayTagEdit: !this.state.displayTagEdit
@@ -87,7 +77,6 @@ class Article extends Component {
           <TagForm
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-          // handleDelete={this.handleDelete}
           deleteATag = {this.props.deleteATag}
           newTag={this.state.newTag}
           joiners={joiners}/>
