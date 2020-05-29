@@ -56,26 +56,27 @@ class TagForm extends Component {
         />
       </form>
 
-      <form
-        className="new-tag"
-        onSubmit={this.handleDelete}
-      >
-        <h3 className="header">
-          Remove a #tag
-        </h3>
+      { this.props.joiners.length < 1 ? null :
+        <>
+          <form className="new-tag" onSubmit={this.handleDelete} >
+            <h3 className="header">
+              Remove a #tag
+            </h3>
 
-        <select value={this.state.selectedTag} onChange={this.handleChange}>
-          { this.props.joiners.map((joiner) =>
-            <option key={joiner.id} value={joiner.tag_name}>{joiner.tag_name}</option>)
-          }
-        </select>
+            <select value={this.state.selectedTag} onChange={this.handleChange} className="select-tag">
+              { this.props.joiners.map((joiner) =>
+                <option key={joiner.id} value={joiner.tag_name}>{joiner.tag_name}</option>)
+              }
+            </select>
 
-        <input
-          className="new-tag-submit" 
-          type="submit" 
-          value="Delete tag" 
-        />
-      </form>
+            <input
+              className="new-tag-submit" 
+              type="submit" 
+              value="Delete tag" 
+            />
+          </form>
+        </>
+      }
       </>
     )
   }
