@@ -85,8 +85,8 @@ class Article extends Component {
           :
           null
         }
-        <span class="like-button">
-            <i class="heart outline like icon"></i>
+        <span className="like-button">
+            <i className="heart outline like icon"></i>
               {likes} likes
          </span>
 
