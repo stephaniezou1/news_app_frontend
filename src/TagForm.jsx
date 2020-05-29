@@ -5,9 +5,9 @@ class TagForm extends Component {
     return (
       <>
       <form className="new-tag" onSubmit={this.props.handleSubmit}>
-        <h5>
+        <h3 className="header">
           Add a #tag
-        </h5>
+        </h3>
         <input
           className="new-tag" 
           type="text" 
