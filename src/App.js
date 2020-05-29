@@ -14,6 +14,27 @@ class App extends React.Component {
     allTags: [],
     filterTerm: ""
   }
+  
+  addALike = (updatedLikesFromChild, articleId) => {
+    fetch(`http://localhost:3000/articles/${articleId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "Application/json"
+      },
+      body: JSON.stringify({
+        likes: updatedLikesFromChild
+      })
+    })
+      .then(r => r.json())
+      .then(updatedArticle => {
+        let copyOfAllArticles = this.state.articles.map((eachArticle) => {
+          return (eachArticle.id === updatedArticle.id ? updatedArticle : eachArticle)
+        })
+        this.setState({
+          articles: copyOfAllArticles
+        })
+      })
+  }
 
   handleFilterTerm = (filterFromChild) => {
     this.setState({
@@ -191,6 +212,7 @@ class App extends React.Component {
           addNewTag={this.addNewTag}
           deleteATag={this.deleteATag}
           formatDateTime={this.formatDateTime}
+          addALike={this.addALike}
         />
       </div>
     );
