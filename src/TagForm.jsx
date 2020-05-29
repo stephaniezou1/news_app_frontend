@@ -6,32 +6,18 @@ class TagForm extends Component {
     joiner_id: 0
   }
 
-  setInitialJoinerId = () => {
-    if (this.props.joiners.length >= 1) {
-      this.setState({
-        joiner_id: this.props.joiners[0]
-      })
-    }
-  }
-
   handleChange = (event) => {
-    // let joinerId = 0
+    let joinerId = 0
 
-    // this.props.joiners.map((joiner) => {
-    //   if (this.state.selectedTag === joiner.tag_name) {
-    //     joinerId = joiner.id
-    //   }
-    // })
-
-    if (this.props.joiners.length >= 1) {
-      this.setState({
-        joiner_id: this.props.joiners[0]
-      })
-      console.log(this.state.joiner_id)
-    }
+    this.props.joiners.map((joiner) => {
+      if (this.state.selectedTag === joiner.tag_name) {
+        joinerId = joiner.id
+      }
+    })
 
     this.setState({
-      selectedTag: event.target.value
+      selectedTag: event.target.value,
+      joiner_id: joinerId
     })
   }
 
@@ -47,9 +33,6 @@ class TagForm extends Component {
   }
 
   render() {
-
-    // console.log(this.state.selectedTag, this.props.joiners, this.state.joiner_id)
-
     return (
       <>
       <form className="new-tag" onSubmit={this.props.handleSubmit}>
