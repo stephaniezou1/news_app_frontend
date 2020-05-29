@@ -54,9 +54,9 @@ class Article extends Component {
           key={joiner.id}>
             #{ joiner.tag_name }
         </button>
-        <button onClick={(evt) => {
+        {/* <button onClick={(evt) => {
           this.handleDelete(joiner.id)
-        }}>x</button> 
+        }}>x</button>  */}
       </div>
     })
     
@@ -78,7 +78,13 @@ class Article extends Component {
           { tagsArray }
         </div>
         
-        <button onClick={this.handleDisplayTagEdit}>Edit tags</button>
+        <button
+          onClick={this.handleDisplayTagEdit}
+          className="tag-toggle"
+          id="edit"
+        >
+          Edit tags
+        </button>
 
         { displayTagEdit
           ?
