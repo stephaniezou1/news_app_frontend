@@ -56,7 +56,10 @@ class Article extends Component {
         </div>
         <h2 className="header">{ title }</h2>
         { author === null || author === "" ? <h3 className="header">By {source_name}</h3> : <h3 className="header">By { author }</h3>}
-        <h5 className="header" id="date">{ this.props.formatDateTime(published_at) }</h5>
+        <h5 className="header" id="date">
+          {/* { this.props.formatDateTime(published_at) } */}
+          { published_at }
+        </h5>
 
         <div className="article-tag">
           { tagsArray }
