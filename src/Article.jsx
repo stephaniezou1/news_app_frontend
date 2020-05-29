@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import Tag from './Tag.jsx'
 import TagForm from './TagForm.jsx'
 import Like from './Like.jsx'
 
@@ -41,7 +40,7 @@ class Article extends Component {
         <button
           className="tag"
           key={joiner.id}>
-            #{ joiner.tag_name }
+            { joiner.tag_name }
         </button>
       </div>
     })
@@ -85,14 +84,12 @@ class Article extends Component {
           joiners={joiners}/>
           :
           null
-        }
-        
+        }        
         <Like 
           likes={this.props.article.likes}
           article={this.props.article}
           addALike={this.props.addALike}
         />
-
       </div>
     )
   }

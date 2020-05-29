@@ -33,9 +33,6 @@ class TagForm extends Component {
   }
 
   render() {
-
-    console.log(this.state.selectedTag, this.props.joiners, this.state.joiner_id)
-
     return (
       <>
       <form className="new-tag" onSubmit={this.props.handleSubmit}>

@@ -21,7 +21,7 @@ return (
         value={props.searchTerm}
         onChange={handleWhichInfoToPassUp}
       />
-      <button onClick={handleReset}>Clear search terms</button>
+      <button className={"search"} id={"clear-search"} onClick={handleReset}>Clear search terms</button>
     </div>
   )
 };

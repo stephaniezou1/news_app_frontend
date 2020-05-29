@@ -4,6 +4,7 @@ import ArticlesContainer from './ArticlesContainer.jsx'
 import SearchArticles from './SearchArticles.jsx'
 import TagsContainer from './TagsContainer.jsx'
 import CovidToggle from './CovidToggle.jsx'
+import Header from './Header.jsx'
 
 class App extends React.Component {
 
@@ -150,7 +151,6 @@ class App extends React.Component {
     return anArray
   }
 
-
   pickArticles = () => {
     let { searchTerm, articles } = this.state
     let newArray = [...articles]
@@ -188,23 +188,23 @@ class App extends React.Component {
     console.log("filter term:", this.state.filterTerm)
     console.log("article:", this.state.articles)
 
-
     return (
   
       <div className="App">
         <h1 className="header">Hegelian Bagel 🥯</h1>
+        
         <TagsContainer 
           tags={this.state.allTags}
           handleSearchTerm={this.handleSearchTerm}
           handleFilterTerm={this.handleFilterTerm}
         />
-        <CovidToggle
-          covidCheck = {this.state.covidCheck}
-          handleCovidCheck={this.handleCovidCheck}
-        />
         <SearchArticles 
           searchTerm={this.state.searchTerm}
           handleSearchTerm={this.handleSearchTerm}
+        />
+        <CovidToggle
+          covidCheck = {this.state.covidCheck}
+          handleCovidCheck={this.handleCovidCheck}
         />
         <ArticlesContainer 
           articles={this.decideWhichArrayToRender()}
@@ -214,6 +214,7 @@ class App extends React.Component {
           formatDateTime={this.formatDateTime}
           addALike={this.addALike}
         />
+        <Header />
       </div>
     );
   }
