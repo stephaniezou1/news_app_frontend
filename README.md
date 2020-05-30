@@ -33,4 +33,4 @@ Coming soon...
 * [News API](https://newsapi.org)
 * [Semantic UI CSS Library](https://semantic-ui.com)
 
-## [Link to backend](https://github.com/stephaniezou1/news_backend)
+[Link to backend](https://github.com/stephaniezou1/news_backend)
