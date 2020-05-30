@@ -32,3 +32,5 @@ Coming soon...
 * [ActiveModel::Serializer](https://github.com/rails-api/active_model_serializers): description
 * [News API](https://newsapi.org)
 * [Semantic UI CSS Library](https://semantic-ui.com)
+
+### [Link to backend](https://github.com/stephaniezou1/news_backend)
