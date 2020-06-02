@@ -10,16 +10,16 @@ Live demo: coming soon...
 ## Features
 
 ### Asynchronous fetches
-* Gets breaking news articles from the News API using asynchronous fetches
+* Pulls breaking news articles from the News API using asynchronous fetches
 
 ### ActiveRecord Associations
 * Models have `has_many`, `belongs_to` and `has_many through` associations
 * Uses ActiveModelSerializers, which turns model attributes into JSON object keys
 
 ### React
-* Used React lifecycle methods to update state
-* Organized code structure by separating components into presentation components and container components
-* Used inverse data flow to send props down and up between parent components and child components
+* Update the application state using React lifecycle methods
+* Organize the code structure by separating components into presentation components and container components
+* Implement inverse data flow to send props down and up between parent components and child components
 
 ### CRUD Operations
 * Filter news articles by tags
