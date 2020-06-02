@@ -1,8 +1,7 @@
 Hegelian Bagel 🥯
 ========================
 
-Hegelian Bagel is a news app that brings you breaking news. Filter out Coronavirus-related news and add tags to articles.
-Made by [Isabel K. Lee](https://www.kleetime.com) and [Stephanie Zou](https://github.com/stephaniezou1).
+Hegelian Bagel is a full-stack news app that brings you breaking news. Filter out Coronavirus-related news and add tags to articles. Made by [Isabel K. Lee](https://www.kleetime.com) and [Stephanie Zou](https://github.com/stephaniezou1).
 
 ![Homepage of Hegelian Bagel](https://i.imgur.com/ze3yA2a.png)
 
@@ -10,6 +9,19 @@ Live demo: coming soon...
 
 ## Features
 
+### Asynchronous fetches
+* Gets breaking news articles from the News API using asynchronous fetches
+
+### ActiveRecord Associations
+* Models have `has_many`, `belongs_to` and `has_many through` associations
+* Uses ActiveModelSerializers, which turns model attributes into JSON object keys
+
+### React
+* Used React lifecycle methods to update state
+* Organized code structure by separating components into presentation components and container components
+* Used inverse data flow to send props down and up between parent components and child components
+
+### CRUD Operations
 * Filter news articles by tags
 * Search for articles by title and author
 * Hide Coronavirus-related news
