@@ -138,14 +138,6 @@ class App extends React.Component {
           article.description.toLowerCase().includes(searchTerm.toLowerCase())
           || article.title.toLowerCase().includes(searchTerm.toLowerCase())
       })
-    // } else if (filterTerm !== "") {
-    //   anArray = articles.filter((article) => {
-    //     return article.joiners.map((joiner) => {
-    //       joiner.filter((joiner) => {
-    //         return joiner.tag_name === filterTerm
-    //       })
-    //     })
-    //   })
     }
     return anArray
   }
