@@ -8,7 +8,7 @@ class CovidToggle extends Component {
 
   render() {
     return (
-      <div class="ui slider checkbox">
+      <div className="ui slider checkbox">
         <input
           type="checkbox"
           name="name"
