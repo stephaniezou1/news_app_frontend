@@ -1,23 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class CovidToggle extends Component {
+const CovidToggle = (props) => {
 
-  handleToggle = (evt) => {
-    this.props.handleCovidCheck(evt.target.checked)
+  let handleToggle = (event) => {
+    props.handleCovidCheck(event.target.checked)
   }
 
-  render() {
-    return (
-      <div className="ui slider checkbox">
-        <input
-          type="checkbox"
-          name="name"
-          onChange={this.handleToggle}
-        />
-        <label><h2 className="header">Hide Coronavirus news</h2></label>
-      </div>
-    )
-  }
+  return (
+    <div className="ui slider checkbox">
+      <input type="checkbox" name="name" onChange={handleToggle} />
+      <label><h2 className="header">Hide Coronavirus news</h2></label>
+    </div>
+  )
 }
 
 export default CovidToggle

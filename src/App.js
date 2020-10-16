@@ -13,7 +13,8 @@ class App extends React.Component {
     searchTerm: "",
     covidCheck: false,
     allTags: [],
-    filterTerm: ""
+    filterTerm: "",
+    covidTerms: ["coronavirus", "covid", "vaccine", "pandemic", "virus", "covid-19"]
   }
   
   addALike = (updatedLikesFromChild, articleId) => {
@@ -120,6 +121,8 @@ class App extends React.Component {
   decideWhichArrayToRender = () => {
     let { covidCheck, searchTerm, articles } = this.state
     let articleArray = [...articles]
+
+    // if covid filter is now an array, turn the article's title and description into an array, and call .includes() on the covid array for each element in the title and description
 
     if (covidCheck) {
       articleArray = articles.filter((article) => {
