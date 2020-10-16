@@ -9,7 +9,7 @@ class TagForm extends Component {
   handleChange = (event) => {
     let joinerId = 0
 
-    this.props.joiners.map((joiner) => {
+    this.props.joiners.forEach((joiner) => {
       if (this.state.selectedTag === joiner.tag_name) {
         joinerId = joiner.id
       }
@@ -37,7 +37,7 @@ class TagForm extends Component {
       <>
       <form className="new-tag" onSubmit={this.props.handleSubmit}>
         <h3 className="header">
-          Add a #tag
+          Add a tag
         </h3>
         <input
           className="new-tag" 
@@ -46,7 +46,7 @@ class TagForm extends Component {
           value={this.props.newTag} 
           onChange={this.props.handleChange}
           autoComplete="off"
-          placeholder="#"
+          placeholder="Enter a tag name"
         />
         <input
           className="new-tag-submit" 
@@ -59,7 +59,7 @@ class TagForm extends Component {
         <>
           <form className="new-tag" onSubmit={this.handleDelete} >
             <h3 className="header">
-              Remove a #tag
+              Remove a tag
             </h3>
 
             <select value={this.state.selectedTag} onChange={this.handleChange} className="select-tag">

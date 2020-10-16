@@ -1,19 +1,35 @@
 import React from 'react'
 import './App.css'
 import ArticlesContainer from './components/ArticlesContainer.jsx'
-import SearchArticles from './components/SearchArticles.jsx'
 import TagsContainer from './components/TagsContainer.jsx'
 import CovidToggle from './components/CovidToggle.jsx'
 import Header from './components/Header.jsx'
+// import SearchArticles from './components/SearchArticles.jsx'
 
 class App extends React.Component {
-
   state = {
     articles: [],
     searchTerm: "all",
     covidCheck: false,
     tags: [],
     covidTerms: ["coronavirus", "covid", "vaccine", "pandemic", "virus", "covid-19"]
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:3000/articles")
+    .then(r => r.json())
+    .then((newArticles) => {
+      this.setState({
+        articles: newArticles
+      })
+    })
+    fetch("http://localhost:3000/tags")
+    .then(r => r.json())
+    .then((newTags) => {
+      this.setState({
+        tags: newTags
+      })
+    })
   }
   
   addALike = (updatedLikesFromChild, articleId) => {
@@ -114,7 +130,7 @@ class App extends React.Component {
     let {covidTerms} = this.state
     let status = false 
 
-    string.split(" ").each((word) => {
+    string.split(" ").forEach((word) => {
       return covidTerms.includes(word) ? status = true : null
     })
 
@@ -122,12 +138,14 @@ class App extends React.Component {
   }
 
   filterArticlesByTag = () => {
-    let {searchTerm, articles} = this.state
+    let {searchTerm, articles, covidCheck} = this.state
     let newArray = []
 
-    if (searchTerm === "all") {
+    if (searchTerm === "all" && !covidCheck) {
       return articles
-    } else {
+    } else if (searchTerm !== "all") {
+      newArray = []
+
       articles.forEach((article) => {
         article.joiners.forEach((joiner) => {
           if (joiner.tag_name === searchTerm) {
@@ -137,64 +155,31 @@ class App extends React.Component {
       })
 
       return newArray
+    } else if (covidCheck) {
+      newArray = []
+
+      articles.forEach((article) => {
+        article.title.toLowerCase().split(" ").forEach((word) => {
+          if (this.state.covidTerms.includes(word)) {
+            newArray.push(article)
+          }
+        })
+      })
+
+      return newArray
     }
-  }
-
-  filterCoronaArticles = () => {
-    let {covidCheck, searchTerm, articles} = this.state
-    let articleArray = [...articles]
-
-    // if covid filter is now an array, turn the article's title and description into an array, and call .includes() on the covid array for each element in the title and description
-
-    if (covidCheck) {
-      articleArray = articles.filter((article) => {
-        return article.description === null
-        ?
-        !article.title.toLowerCase().includes("coronavirus")
-        :
-        !article.title.toLowerCase().includes("coronavirus") && !article.description.toLowerCase().includes("coronavirus")
-      })
-
-    } else if (!covidCheck) {
-      articleArray = articles.filter((article) => {
-        return article.description === null
-          ?
-          null
-          :
-          article.description.toLowerCase().includes(searchTerm.toLowerCase())
-          || article.title.toLowerCase().includes(searchTerm.toLowerCase())
-      })
-    }
-    
-    return articleArray
-  }
-
-  componentDidMount() {
-    fetch("http://localhost:3000/articles")
-    .then(r => r.json())
-    .then((newArticles) => {
-      this.setState({
-        articles: newArticles
-      })
-    })
-    fetch("http://localhost:3000/tags")
-    .then(r => r.json())
-    .then((newTags) => {
-      this.setState({
-        tags: newTags
-      })
-    })
   }
 
   render(){
+
     return (
       <div className="App">
-        <h1 className="header">Hegelian Bagel 🥯</h1>
+        <h1 className="header">Hegelian Bagel <span role="img" aria-label="bagel">🥯</span></h1>
         
         <TagsContainer 
           tags={this.state.tags}
           handleSearchTerm={this.handleSearchTerm}
-          handleFilterTerm={this.handleFilterTerm}
+          // handleFilterTerm={this.handleFilterTerm}
         />
         {/* <SearchArticles 
           searchTerm={this.state.searchTerm}

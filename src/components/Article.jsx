@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import TagForm from './TagForm.jsx'
-import Like from './Like.jsx'
+// import Like from './Like.jsx'
 
 class Article extends Component {
-
   state = {
     newTag: "",
     displayTagEdit: false,
@@ -48,7 +47,7 @@ class Article extends Component {
         <div className = "card">
 
         <div className="image">
-          <a href = {url} target="blank"><img src = {url_to_image} /></a>
+          <a href={url} target="blank"><img src={url_to_image} alt={title}/></a>
         </div>
 
         <div className="meta">
@@ -56,7 +55,7 @@ class Article extends Component {
           <h5 className="header" id="date">{published_at}</h5>
         </div>
 
-        <h2 className="header">{title}</h2>
+        <h2 className="header"><a href={url} target="blank" className="title">{title}</a></h2>
         { author === null || author === "" ? <h3 className="header">By {source_name}</h3> : <h3 className="header">By {author}</h3>}
         <p className="header">{description}</p>
 
