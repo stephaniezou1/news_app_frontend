@@ -1,10 +1,10 @@
 import React from 'react'
 import './App.css'
-import ArticlesContainer from './ArticlesContainer.jsx'
-import SearchArticles from './SearchArticles.jsx'
-import TagsContainer from './TagsContainer.jsx'
-import CovidToggle from './CovidToggle.jsx'
-import Header from './Header.jsx'
+import ArticlesContainer from './components/ArticlesContainer.jsx'
+import SearchArticles from './components/SearchArticles.jsx'
+import TagsContainer from './components/TagsContainer.jsx'
+import CovidToggle from './components/CovidToggle.jsx'
+import Header from './components/Header.jsx'
 
 class App extends React.Component {
 
