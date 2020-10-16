@@ -4,7 +4,6 @@ class Tag extends Component {
 
   handleTagFilter = (event) => {
     this.props.handleSearchTerm(event.target.innerText)
-    console.log(event.target.innerText)
   }
 
   render() {

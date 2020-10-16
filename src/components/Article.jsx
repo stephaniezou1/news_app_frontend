@@ -31,7 +31,6 @@ class Article extends Component {
   }
 
   render() {
-    console.log("likes:", this.props.article.likes)
     let { title, author, description, source_name, published_at, url, url_to_image, joiners } = this.props.article 
     let { displayTagEdit } = this.state
 

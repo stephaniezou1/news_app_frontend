@@ -10,10 +10,9 @@ class App extends React.Component {
 
   state = {
     articles: [],
-    searchTerm: "",
+    searchTerm: "all",
     covidCheck: false,
-    allTags: [],
-    filterTerm: "",
+    tags: [],
     covidTerms: ["coronavirus", "covid", "vaccine", "pandemic", "virus", "covid-19"]
   }
   
@@ -38,12 +37,6 @@ class App extends React.Component {
       })
   }
 
-  handleFilterTerm = (filterFromChild) => {
-    this.setState({
-      filterTerm: filterFromChild
-    })
-  }
-
   formatDateTime(date) {
     let year = date.getFullYear()
     let day = date.getDate()
@@ -62,12 +55,12 @@ class App extends React.Component {
   deleteATag = (updatedArticleFromChild, joinerId) => {
     console.log("UPDATED ARTICLE", updatedArticleFromChild)
     let copyOfAllArticles = this.state.articles.filter((article) => article.id !== updatedArticleFromChild)
-    let copyOfAllTags = this.state.allTags.filter((tag) =>
+    let copyOfAllTags = this.state.tags.filter((tag) =>
       tag.id !== updatedArticleFromChild.joinerId
     )
     this.setState({
       articles: copyOfAllArticles,
-      allTags: copyOfAllTags
+      tags: copyOfAllTags
     })
   }
 
@@ -84,7 +77,6 @@ class App extends React.Component {
     })
       .then(response => response.json())
       .then((responseObject) => {
-        console.log(responseObject)
         let copyOfArticles = this.state.articles.map((article) => {
           if (article.id === articleId) {
             return responseObject.article
@@ -93,14 +85,14 @@ class App extends React.Component {
           }
         })
         
-        if (this.state.allTags.some((tag) => tag.id === responseObject.tag.id)) {
+        if (this.state.tags.some((tag) => tag.id === responseObject.tag.id)) {
             this.setState({
               articles: copyOfArticles
           })
         } else {
           this.setState({
             articles: copyOfArticles, 
-            allTags: [...this.state.allTags, responseObject.tag]
+            tags: [...this.state.tags, responseObject.tag]
           })
         }
     })
@@ -118,8 +110,38 @@ class App extends React.Component {
     })
   }
 
-  decideWhichArrayToRender = () => {
-    let { covidCheck, searchTerm, articles } = this.state
+  covidFilter = (string) => {
+    let {covidTerms} = this.state
+    let status = false 
+
+    string.split(" ").each((word) => {
+      return covidTerms.includes(word) ? status = true : null
+    })
+
+    return status
+  }
+
+  filterArticlesByTag = () => {
+    let {searchTerm, articles} = this.state
+    let newArray = []
+
+    if (searchTerm === "all") {
+      return articles
+    } else {
+      articles.forEach((article) => {
+        article.joiners.forEach((joiner) => {
+          if (joiner.tag_name === searchTerm) {
+            newArray.push(article)
+          }
+        })
+      })
+
+      return newArray
+    }
+  }
+
+  filterCoronaArticles = () => {
+    let {covidCheck, searchTerm, articles} = this.state
     let articleArray = [...articles]
 
     // if covid filter is now an array, turn the article's title and description into an array, and call .includes() on the covid array for each element in the title and description
@@ -147,21 +169,6 @@ class App extends React.Component {
     return articleArray
   }
 
-  pickArticles = () => {
-    let { searchTerm, articles } = this.state
-    let newArray = [...articles]
-    if (searchTerm === "") {
-      return newArray
-    } else {
-      newArray = articles.filter((article) => {
-        article.joiners.map((joiner) => {
-          return joiner.tag_name === searchTerm.replace(/[^A-Za-z0-9_]/g,"")
-        })
-      })
-    }
-    return newArray
-  }
-
   componentDidMount() {
     fetch("http://localhost:3000/articles")
     .then(r => r.json())
@@ -169,13 +176,12 @@ class App extends React.Component {
       this.setState({
         articles: newArticles
       })
-      console.log(this.state.articles)
     })
     fetch("http://localhost:3000/tags")
     .then(r => r.json())
     .then((newTags) => {
       this.setState({
-        allTags: newTags
+        tags: newTags
       })
     })
   }
@@ -186,21 +192,20 @@ class App extends React.Component {
         <h1 className="header">Hegelian Bagel 🥯</h1>
         
         <TagsContainer 
-          tags={this.state.allTags}
+          tags={this.state.tags}
           handleSearchTerm={this.handleSearchTerm}
           handleFilterTerm={this.handleFilterTerm}
         />
-        <SearchArticles 
+        {/* <SearchArticles 
           searchTerm={this.state.searchTerm}
           handleSearchTerm={this.handleSearchTerm}
-        />
+        /> */}
         <CovidToggle
           covidCheck = {this.state.covidCheck}
           handleCovidCheck={this.handleCovidCheck}
         />
         <ArticlesContainer 
-          articles={this.decideWhichArrayToRender()}
-          // articles={this.pickArticles()}
+          articles={this.filterArticlesByTag()}
           addNewTag={this.addNewTag}
           deleteATag={this.deleteATag}
           formatDateTime={this.formatDateTime}
