@@ -1,11 +1,24 @@
 Hegelian Bagel 🥯
 ========================
 
-Hegelian Bagel a full-stack news app that allows you to filter out Coronavirus-related news and browse articles by trending tags. Made by [Isabel K. Lee](https://www.kleetime.com) and [Stephanie Zou](https://github.com/stephaniezou1).
+Hegelian Bagel is a full-stack news app that allows you to filter out Coronavirus-related news and browse articles by trending tags. Made by [Isabel K. Lee](https://www.kleetime.com) and [Stephanie Zou](https://github.com/stephaniezou1).
 
 ![Homepage of Hegelian Bagel](https://i.imgur.com/ze3yA2a.png)
 
-Live demo: coming soon...
+## Getting started
+1. Install the [Rails backend](https://github.com/stephaniezou1/news_backend)
+2. Install [Node.js and npm](https://www.npmjs.com/get-npm)
+
+    ```$ brew install node```
+    
+3. Clone this repo and cd into the directory
+4. Install all dependencies
+
+    ```$ npm install```
+
+5. Make sure the Rails server is running and then run the app
+
+    ```$ npm start```
 
 ## Features
 
