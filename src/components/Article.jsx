@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import dayjs from 'dayjs'
 import TagForm from './TagForm.jsx'
 // import Like from './Like.jsx'
 
@@ -52,7 +53,7 @@ class Article extends Component {
 
         <div className="meta">
           <h5 className="header" id="source">{source_name}</h5>
-          <h5 className="header" id="date">{published_at}</h5>
+          <h5 className="header" id="date">{dayjs(published_at).format('MMM DD, YYYY @ h:mma')}</h5>
         </div>
 
         <h2 className="header"><a href={url} target="blank" className="title">{title}</a></h2>

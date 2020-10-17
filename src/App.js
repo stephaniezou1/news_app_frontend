@@ -171,7 +171,6 @@ class App extends React.Component {
   }
 
   render(){
-
     return (
       <div className="App">
         <h1 className="header">Hegelian Bagel <span role="img" aria-label="bagel">🥯</span></h1>
